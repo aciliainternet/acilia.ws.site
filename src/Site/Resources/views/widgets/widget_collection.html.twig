@@ -1,0 +1,5 @@
+{% for widget in widgets %}
+    {% if widget != current_code %}
+        {{ render_widget(widget) }}
+    {% endif %}
+{% endfor %}

@@ -1,2 +1,2 @@
-# acilia.ws.site
-Widestand site bundle
+# WSSite
+WideStand Site bundle

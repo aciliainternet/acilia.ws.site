@@ -1,0 +1,27 @@
+title: Site
+menu: Site
+maintenance_page.title: In maintenance
+maintenance_page.message: In Maintenance, we'll back soon!
+
+# Settings
+settings.section.name: Site Behavior
+settings.section.description: Define how your site will behave
+
+# General Settings
+general.settings.group.general.name: General
+general.settings.group.general.description: General configurations
+general.settings.setting.site_general_force_https.name: Force HTTPS
+general.settings.setting.site_general_force_https.description: Forces all traffic to go through HTTPS, including the CMS
+general.settings.setting.site_general_in_maintenance.name: In Maintenance
+general.settings.setting.site_general_in_maintenance.description: Sets the Site in Maintenance mode
+
+# Widgets info
+widget.title: Select from available widgets
+widget.hello_world.name: Hello World
+widget.hello_world.description: An example Widget, not really for use
+widget.free_html.name: Free HTML content
+widget.free_html.description: Allows you to place any text or HTML content freely
+widget.widget_collection.name: Widgets Collection
+widget.widget_collection.description: Renders a collection of predefined Widgets
+widget.asset_image.name: Asset Image
+widget.asset_image.description: Allows you to uploaded an image

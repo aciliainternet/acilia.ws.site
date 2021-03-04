@@ -1,0 +1,26 @@
+# Widgets
+menu: Widgets
+title: Widgets
+fields.code.label: Code
+fields.name.label: Widget Name
+fields.widget.label: Widget
+fields.createdAt.label: Created at
+fields.freehtml.label: HTML Code
+fields.publishStatus.label: Publishing status
+fields.code.placeholder: Code
+fields.name.placeholder: Widget Name
+create_success: Widget created
+create_error: There was an error when creating the Widget, please try again.
+edit_success: Widget edited
+edit_error: There was an error when editing the Widget, please try again.
+delete_warning: Are you sure you want to delete this Widget?
+delete_success: Widget deleted successfully
+no_rows_found: No Widgets available
+not_found: Unable to find the Widget with code %s
+form.code.label: Code
+form.name.label: Widget Name
+form.widget.label: Widget
+form.createdAt.label: Created at
+form.freehtml.label: HTML Code
+form.code.placeholder: Code
+form.name.placeholder: Widget Name

@@ -1,0 +1,66 @@
+settings.section.name: SEO & Social
+settings.section.description: Define la configuración de Optimización de Buscadores (SEO) y Social
+
+# Robots Settings
+robots.settings.group.robots.name: Robots
+robots.settings.group.robots.description: Configurar el fichero robots.txt
+
+robots.settings.setting.robots_custom_rules.name: Reglas personalizadas
+robots.settings.setting.robots_custom_rules.description: Define reglas personalizadas para el robots.txt
+
+# Human Settings
+robots.settings.group.humans.name: Humans
+robots.settings.group.humans.description: Configurar el fichero humans.txt
+
+robots.settings.setting.humans_contact_name.name: Nombre de contacto
+robots.settings.setting.humans_contact_name.description: Nombre de la persona de contacto del sito
+robots.settings.setting.humans_contact_form.name: Forma de contacto
+robots.settings.setting.humans_contact_form.description: Correo electrónico o enlace para contactarte
+robots.settings.setting.humans_contact_form.placeholder: juanperez [at] gmail.com
+robots.settings.setting.humans_location.name: Ubicación
+robots.settings.setting.humans_location.description: La ubicación donde (principalmente) te encuentras tú y tu equipo
+
+# Social Facebook Settings
+social.settings.group.facebook.name: Facebook
+social.settings.group.facebook.description: Configurar la cuenta de Facebook
+
+social.settings.setting.social_facebook_page.name: URL de la Página
+social.settings.setting.social_facebook_page.description: La URL de la página de fans en Facebook
+social.settings.setting.social_facebook_page.placeholder: https://www.facebook.com/aciliainternet/
+
+# Social Twitter Settings
+social.settings.group.twitter.name: Twitter
+social.settings.group.twitter.description: Configurar la cuenta de Twitter
+
+social.settings.setting.social_twitter_profile.name: Nombre de cuenta
+social.settings.setting.social_twitter_profile.description: El nombre de la cuenta en Twitter
+social.settings.setting.social_twitter_profile.placeholder: aciliainternet
+
+# Social Pinterest Settings
+social.settings.group.pinterest.name: Pinterest
+social.settings.group.pinterest.description: Configurar el panel de Pinterest
+
+social.settings.setting.social_pinterest_board.name: URL del Panel
+social.settings.setting.social_pinterest_board.description: La URL del panel en Pinterest
+social.settings.setting.social_pinterest_board.placeholder: https://www.pinterest.com/bonnietsang/living-spaces/
+
+# Social Linkedin Settings
+social.settings.group.linkedin.name: LinkedIn
+social.settings.group.linkedin.description: Configurar página de LinkedIn
+
+social.settings.setting.social_linkedin_page.name: URL de la Página
+social.settings.setting.social_linkedin_page.description: La URL de la página en LinkedIn
+social.settings.setting.social_linkedin_page.placeholder: https://www.linkedin.com/company/acilia-internet
+
+# Social YouTube Settings
+social.settings.group.youtube.name: YouTube
+social.settings.group.youtube.description: Configurar página de YouTube
+
+social.settings.setting.social_youtube_page.name: URL de la Página
+social.settings.setting.social_youtube_page.description: La URL de la página en YouTube
+social.settings.setting.social_youtube_page.placeholder: https://www.youtube.com/user/acilia-internet
+
+# Metadata Form Fields
+metadata.fields.metadataTitle.label: Título de Metadata
+metadata.fields.metadataDescription.label: Descripción de Metadata
+metadata.fields.metadataKeywords.label: Keywords de Metadata

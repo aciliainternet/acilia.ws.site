@@ -1,0 +1,42 @@
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    WS\Site\:
+        resource: '../../*'
+        exclude: '../../{Entity,Migrations,Tests,Library,Widget,Twig/Tag}'
+
+    WS\Site\Controller\:
+        resource: '../../Controller/*'
+        tags: ['controller.service_arguments']
+
+    # Tag Services (WS Site Services must have 512 priority)
+    WS\Site\Service\SettingDefinitionService:
+        tags:
+            - { name: ws.setting_definition, priority: 512 }
+
+    WS\Site\Service\SidebarDefinitionService:
+        tags:
+            - { name: ws.sidebar_definition, priority: 512 }
+
+    WS\Site\Service\WidgetService:
+        arguments:
+            $debug: '%kernel.debug%'
+
+    WS\Site\Widestand:
+        tags:
+            - { name: ws.component }
+
+    # Listeners
+    WS\Site\EventListener\SiteListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onRequest, priority: 9 }
+
+    WS\Site\EventListener\RedirectionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onRequest, priority: 120 }
+            - { name: kernel.event_listener, event: kernel.controller, method: onController, priority: 121 }

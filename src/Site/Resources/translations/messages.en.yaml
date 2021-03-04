@@ -1,0 +1,9 @@
+# Site Translations
+ws.translation.policies.name: Policies
+ws.translation.policies.description: Policies and small legal texts
+
+# Public Site Translations
+ws.policies.cookie_policy.title: Cookie Policy
+ws.policies.cookie_policy.disclaimer: This site uses it's own and third-party cookies to improve your browsing experience
+ws.policies.cookie_policy.accept: Accept
+ws.policies.copyright: All rights reserved © %year%

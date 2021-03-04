@@ -1,0 +1,66 @@
+settings.section.name: SEO & Social
+settings.section.description: Define Search Engine Optimizations and Social settings
+
+# Robots Settings
+robots.settings.group.robots.name: Robots
+robots.settings.group.robots.description: Configure the robots.txt file
+
+robots.settings.setting.robots_custom_rules.name: Custom Rules
+robots.settings.setting.robots_custom_rules.description: Define custom robots.txt rules
+
+# Human Settings
+robots.settings.group.humans.name: Humans
+robots.settings.group.humans.description: Configure the humans.txt file
+
+robots.settings.setting.humans_contact_name.name: Contact name
+robots.settings.setting.humans_contact_name.description: Name of the person of contact for the site
+robots.settings.setting.humans_contact_form.name: Contact form
+robots.settings.setting.humans_contact_form.description: Email or link to reach out to you
+robots.settings.setting.humans_contact_form.placeholder: johndoe [at] gmail.com
+robots.settings.setting.humans_location.name: Location
+robots.settings.setting.humans_location.description: Location where you and your team is (mostly)
+
+# Social Facebook Settings
+social.settings.group.facebook.name: Facebook
+social.settings.group.facebook.description: Configure your Facebook account
+
+social.settings.setting.social_facebook_page.name: Page URL
+social.settings.setting.social_facebook_page.description: The URL to the Facebook fan page
+social.settings.setting.social_facebook_page.placeholder: https://www.facebook.com/aciliainternet/
+
+# Social Twitter Settings
+social.settings.group.twitter.name: Twitter
+social.settings.group.twitter.description: Configure your Twitter account
+
+social.settings.setting.social_twitter_profile.name: Account name
+social.settings.setting.social_twitter_profile.description: The name of the Twitter account
+social.settings.setting.social_twitter_profile.placeholder: aciliainternet
+
+# Social Pinterest Settings
+social.settings.group.pinterest.name: Pinterest
+social.settings.group.pinterest.description: Configure your Pinterest board
+
+social.settings.setting.social_pinterest_board.name: Board URL
+social.settings.setting.social_pinterest_board.description: The URL to the Pinterest board
+social.settings.setting.social_pinterest_board.placeholder: https://www.pinterest.com/bonnietsang/living-spaces/
+
+# Social Linkedin Settings
+social.settings.group.linkedin.name: LinkedIn
+social.settings.group.linkedin.description: Configure your LinkedIn page
+
+social.settings.setting.social_linkedin_page.name: Page URL
+social.settings.setting.social_linkedin_page.description: The URL to the LinkedIn page
+social.settings.setting.social_linkedin_page.placeholder: https://www.linkedin.com/company/acilia-internet
+
+# Social YouTube Settings
+social.settings.group.youtube.name: YouTube
+social.settings.group.youtube.description: Configure your YouTube page
+
+social.settings.setting.social_youtube_page.name: Page URL
+social.settings.setting.social_youtube_page.description: The URL to the YouTube page
+social.settings.setting.social_youtube_page.placeholder: https://www.youtube.com/user/acilia-internet
+
+# Metadata Form Fields
+metadata.fields.metadataTitle.label: Metadata Title
+metadata.fields.metadataDescription.label: Metadata Description
+metadata.fields.metadataKeywords.label: Metadata Keywords

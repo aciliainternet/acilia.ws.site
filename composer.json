@@ -1,0 +1,20 @@
+{
+    "name": "aciliainternet/acilia.ws.site",
+    "description": "Widestand Site bundle",
+    "type": "project",
+    "license": "proprietary",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:aciliainternet/WSCore.git"
+        }
+    ],
+    "require": {
+        "aciliainternet/WSCore": "5.x"
+    },
+    "autoload": {
+        "psr-4": {
+            "WS\\Site\\": "src/Site"
+        }
+    }
+}

@@ -1,0 +1,10 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        tags:
+            - { name: ws.widget }
+
+    WS\Site\Widget\:
+        resource: '../../Widget/*'

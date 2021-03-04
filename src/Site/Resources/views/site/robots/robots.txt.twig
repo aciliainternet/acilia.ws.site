@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /cms
+Disallow: /site
+
+{{ get_setting('robots_custom_rules') }}
+
+Sitemap: {{ app.request.schemeAndHttpHost }}/sitemap.xml

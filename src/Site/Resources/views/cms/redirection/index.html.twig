@@ -1,0 +1,22 @@
+{% extends('@WSCore/cms/crud/index.html.twig') %}
+
+{% block crud_table_body_row %}
+    <td class="c-table__cell">
+        <a
+                class="c-table__link"
+                href="{{ path("#{route_prefix}_edit", { 'id': entity.id }) }}"
+        >
+            {% if field.isDate|default(false) %}
+                {% if attribute(entity, field.name) is null %}
+                    -
+                {% else %}
+                    {{ attribute(entity, field.name)|date('date_hour_format'|trans({}, 'ws_cms')) }}
+                {% endif %}
+            {% elseif field.name == 'domain' and attribute(entity, field.name) is empty%}
+                {{ attribute(entity, field.name) != '' ? attribute(entity, field.name) : '*' }}
+            {% else %}
+                {{ attribute(entity, field.name) }}
+            {% endif %}
+        </a>
+    </td>
+{% endblock %}

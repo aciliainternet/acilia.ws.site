@@ -1,0 +1,18 @@
+# Redirection
+menu: Redirections
+title: Redirections
+fields.origin.label: Origin
+fields.origin.placeholder: /origin
+fields.destination.label: Destination
+fields.destination.placeholder: /destination
+fields.createdAt.label: Created at
+fields.domain.label: Domain
+fields.domain.placeholder: All domains
+create_success: Redirection created
+create_error: There was an error when creating the Redirection, please try again.
+edit_success: Redirection edited
+edit_error: There was an error when editing the Redirection, please try again.
+delete_warning: Are you sure you want to delete this Redirection?
+delete_success: Redirection deleted successfully
+no_rows_found: No Redirections available
+not_found: Unable to find the Redirection with id %s

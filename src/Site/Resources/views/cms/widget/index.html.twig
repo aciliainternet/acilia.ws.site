@@ -1,0 +1,69 @@
+{% extends('@WSCore/cms/crud/index.html.twig') %}
+
+{% block crud_filter %}
+    <form
+        class="c-toolbar c-toolbar--caption u-justify-space-between"
+        accept-charset="UTF-8"
+    >
+        {% block crud_create_action %}
+            <div class="u-flex u-mr-auto">
+                <h4 class="c-toolbar__title u-mr-10">{{ 'title'|trans([], trans_prefix) }}</h4>
+                <button class="c-btn c-btn--brand u-mr-10 js-open-modal-widget-list"
+                    type="button">
+                    {{ 'new'|trans({}, 'ws_cms') }}
+                </button>
+            </div>
+        {% endblock %}
+
+        {{ include(
+            '@WSCore/cms/general/batch.html.twig',
+            { 'batch_actions': batch_actions, 'route_prefix': route_prefix },
+            with_context = false
+        ) }}
+
+        <div class="c-field c-field--inline has-icon-right u-mr-10">
+            <span class="c-field__icon">
+                <i class="fal fa-search"></i>
+            </span>
+            <label class="u-hidden-visually" for="navbar-search">
+                {{ 'search'|trans({}, 'ws_cms') }}
+            </label>
+            <input
+                class="c-input c-input--small"
+                id="navbar-search"
+                type="text"
+                placeholder="{{ 'search'|trans({}, 'ws_cms') }}"
+                name="f"
+                value="{{ app.request.get('f') }}"
+                autocomplete="off"
+            >
+        </div>
+        <button type="submit" class="c-btn c-btn--info u-hidden@md--down">
+            {{ source('@WSCore/cms/icons/search.svg') }}
+            {{ 'search'|trans({}, 'ws_cms') }}
+        </button>
+    </form>
+
+    <div class="js-widget-list-modal" style="display:none;">
+        <div class="u-flex u-justify-between u-pb-30">
+            <h2 class="u-h2 u-width-75">{{ 'widget.title'|trans({}, 'ws_cms_site') }}</h2>
+        </div>
+        <div class="c-divider u-mb-50"></div>
+        <div class="c-widget-modal">
+            <div class="c-widget-modal__list">
+                {% for widget in widgets %}
+                    {% set translation_domain = widget.translationDomain is defined ? widget.translationDomain : 'ws_cms_site' %}
+                    <a href="{{ path("#{route_prefix}_create", { 'widgetType': widget.id }) }}"class="c-widget-modal__item ws-widget-selector">
+                        <i class="c-widget-modal__icon u-mb-10 {{ widget.icon }} fa-5x "></i>
+                        <p class="u-text-small u-text-uppercase u-font-semibold u-mb-5">
+                            {{ "widget.#{widget.id}.name"|trans({}, translation_domain) }}
+                        </p>
+                        <p class="u-text-xsmall">
+                            {{ "widget.#{widget.id}.description"|trans({}, translation_domain) }}
+                        </p>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

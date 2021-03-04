@@ -1,0 +1,9 @@
+# Site Translations
+ws.translation.policies.name: Políticas
+ws.translation.policies.description: Pequeños textos legales y políticas
+
+# Public Site Translations
+ws.policies.cookie_policy.title: Uso de Cookies
+ws.policies.cookie_policy.disclaimer: Este sitio utiliza sus cookies propias y de teceros para mejorar la experiencia del usuario
+ws.policies.cookie_policy.accept: Aceptar
+ws.policies.copyright: Todos los derechos reservados © %year%
