@@ -23,6 +23,16 @@ class RedirectionService extends AbstractService
         return ['origin'];
     }
 
+    public function getListFields(): array
+    {
+        return [
+            ['name' => 'domain', 'sortable' => true],
+            ['name' => 'origin', 'sortable' => true],
+            ['name' => 'destination', 'sortable' => true],
+            ['name' => 'createdAt', 'sortable' => false, 'width' => 200, 'isDate' => true],
+        ];
+    }
+
     public function getValidRedirection(string $url, string $host)
     {
         return $this->repository->findValidRedirection($url, $host);

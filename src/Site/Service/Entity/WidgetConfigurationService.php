@@ -2,6 +2,7 @@
 
 namespace WS\Site\Service\Entity;
 
+use WS\Core\Library\Publishing\PublishingEntityInterface;
 use WS\Site\Entity\WidgetConfiguration;
 use WS\Site\Form\CMS\WidgetConfigurationType;
 use WS\Core\Service\ContextService;
@@ -33,6 +34,16 @@ class WidgetConfigurationService extends AbstractService
     public function getSortFields() : array
     {
         return ['code'];
+    }
+
+    public function getListFields() : array
+    {
+        return [
+            ['name' => 'name'],
+            ['name' => 'widget'],
+            ['name' => 'publishStatus', 'filter' => PublishingEntityInterface::FILTER_STATUS, 'options' => ['badge' => true]],
+            ['name' => 'createdAt', 'width' => 200, 'isDate' => true],
+        ];
     }
 
     public function getImageEntityClass($entity) : ?string

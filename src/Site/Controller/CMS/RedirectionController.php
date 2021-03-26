@@ -32,14 +32,4 @@ class RedirectionController extends AbstractController
 
         return true;
     }
-
-    protected function getListFields(): array
-    {
-        return [
-            ['name' => 'domain', 'sortable' => true],
-            ['name' => 'origin', 'sortable' => true],
-            ['name' => 'destination', 'sortable' => true],
-            ['name' => 'createdAt', 'sortable' => false, 'width' => 200, 'isDate' => true],
-        ];
-    }
 }

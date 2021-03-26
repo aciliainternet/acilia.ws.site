@@ -37,16 +37,6 @@ class WidgetController extends AbstractController
         return 'ws_cms_site_widget';
     }
 
-    protected function getListFields() : array
-    {
-        return [
-            ['name' => 'name'],
-            ['name' => 'widget'],
-            ['name' => 'publishStatus', 'filter' => PublishingEntityInterface::FILTER_STATUS, 'options' => ['badge' => true]],
-            ['name' => 'createdAt', 'width' => 200, 'isDate' => true],
-        ];
-    }
-
     protected function useCRUDTemplate($template) : bool
     {
         if ($template == 'show.html.twig') {
