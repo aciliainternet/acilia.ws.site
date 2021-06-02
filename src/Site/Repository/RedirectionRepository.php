@@ -25,12 +25,16 @@ class RedirectionRepository extends AbstractRepository
         return ['origin', 'destination'];
     }
 
-    public function findValidRedirection(string $url, string $host)
+    public function findValidRedirection(string $url, string $host, bool $exactMatch)
     {
         $sql = 'SELECT redirection_id, redirection_origin, redirection_destination'
-            . ' FROM ws_site_redirection r'
-            . ' WHERE ? REGEXP CONCAT(\'^\', redirection_origin) '
-            . ' AND ( redirection_domain is null OR ? = redirection_domain)'
+            . ' FROM ws_site_redirection r';
+        if ($exactMatch === true) {
+            $sql .= ' WHERE ? = redirection_origin';
+        } else {
+            $sql .= ' WHERE ? REGEXP CONCAT(\'^\', redirection_origin) ';
+        }
+        $sql .= ' AND ( redirection_domain is null OR ? = redirection_domain)'
             . ' LIMIT 1';
 
         $rsm = new ResultSetMapping();

@@ -33,8 +33,8 @@ class RedirectionService extends AbstractService
         ];
     }
 
-    public function getValidRedirection(string $url, string $host)
+    public function getValidRedirection(string $url, string $host, bool $exactMatch)
     {
-        return $this->repository->findValidRedirection($url, $host);
+        return $this->repository->findValidRedirection($url, $host, $exactMatch);
     }
 }
