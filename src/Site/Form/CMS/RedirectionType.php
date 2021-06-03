@@ -3,6 +3,7 @@
 namespace WS\Site\Form\CMS;
 
 use WS\Core\Entity\Domain;
+use WS\Core\Library\Form\ToggleChoiceType;
 use WS\Site\Entity\Redirection;
 use WS\Site\Library\Metadata\MetadataFormTrait;
 use Doctrine\ORM\EntityRepository;
@@ -45,11 +46,18 @@ class RedirectionType extends AbstractType
                 ],
             ])
             ->add('destination', TextType::class, [
-            'label' => 'fields.destination.label',
-            'attr' => [
-                'placeholder' => 'fields.destination.placeholder',
-            ],
-        ])
+                'label' => 'fields.destination.label',
+                'attr' => [
+                    'placeholder' => 'fields.destination.placeholder',
+                ],
+            ])
+            ->add('exactMatch', ToggleChoiceType::class, [
+                'label' => 'fields.exactMatch.label',
+                'choices' => [
+                    'form.exactMatch.option.no.label' => false,
+                    'form.exactMatch.option.yes.label' => true,
+                ],
+            ])
         ;
 
         $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {

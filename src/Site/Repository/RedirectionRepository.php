@@ -25,8 +25,10 @@ class RedirectionRepository extends AbstractRepository
         return ['origin', 'destination'];
     }
 
-    public function findValidRedirection(string $url, string $host, bool $exactMatch)
+    public function findValidRedirection(string $url, string $host)
     {
+        $exactMatch = false;
+
         $sql = 'SELECT redirection_id, redirection_origin, redirection_destination'
             . ' FROM ws_site_redirection r';
         if ($exactMatch === true) {

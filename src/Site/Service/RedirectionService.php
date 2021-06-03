@@ -25,9 +25,9 @@ class RedirectionService
         return $this->enabled;
     }
 
-    public function getRedirection(string $url, string $host, bool $exactMatch = false): ?RedirectResponse
+    public function getRedirection(string $url, string $host): ?RedirectResponse
     {
-        $redirection = $this->redirectionEntityService->getValidRedirection($url, $host, $exactMatch);
+        $redirection = $this->redirectionEntityService->getValidRedirection($url, $host);
 
         if ($redirection instanceof Redirection) {
             return new RedirectResponse(

@@ -29,12 +29,13 @@ class RedirectionService extends AbstractService
             ['name' => 'domain', 'sortable' => true],
             ['name' => 'origin', 'sortable' => true],
             ['name' => 'destination', 'sortable' => true],
+            ['name' => 'exactMatch', 'filter' => 'ws_redirection_exact_match_format'],
             ['name' => 'createdAt', 'sortable' => false, 'width' => 200, 'isDate' => true],
         ];
     }
 
-    public function getValidRedirection(string $url, string $host, bool $exactMatch)
+    public function getValidRedirection(string $url, string $host)
     {
-        return $this->repository->findValidRedirection($url, $host, $exactMatch);
+        return $this->repository->findValidRedirection($url, $host);
     }
 }
