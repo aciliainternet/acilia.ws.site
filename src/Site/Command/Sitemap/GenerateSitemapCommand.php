@@ -95,7 +95,7 @@ class GenerateSitemapCommand extends Command
 
     private function saveSitemaps($xml, $host, $locale = null)
     {
-        $sitemapPath = sprintf('%s/public/site/sitemap/', $this->projectDir);
+        $sitemapPath = sprintf('%s/%s', $this->projectDir, $this->sitemapService->getRootPath());
         if (!file_exists($sitemapPath)) {
             mkdir($sitemapPath);
         }

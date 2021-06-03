@@ -21,6 +21,7 @@ use Symfony\Component\DependencyInjection\Loader;
 use WS\Site\Library\Widget\WidgetCompilerPass;
 use WS\Site\Library\Widget\WidgetInterface;
 use WS\Site\Service\RedirectionService;
+use WS\Site\Service\SitemapService;
 
 class WSSiteExtension extends Extension
 {
@@ -69,5 +70,9 @@ class WSSiteExtension extends Extension
         // Configure Redirection
         $redirectionService = $container->getDefinition(RedirectionService::class);
         $redirectionService->setArgument(0, $config['redirection']);
+
+        // Configure Sitemap
+        $sitemapeService = $container->getDefinition(SitemapService::class);
+        $sitemapeService->setArgument(0, $config['sitemap']);
     }
 }

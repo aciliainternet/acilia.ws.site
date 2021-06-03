@@ -17,6 +17,15 @@ class Configuration implements ConfigurationInterface
                     ->defaultTrue()
                     ->info('Disables or Enables the Redirection service.')
                 ->end() // redirection
+                ->arrayNode('sitemap')
+                    ->addDefaultsIfNotSet()
+                    ->info('Allows to configure sitemap root location.')
+                    ->children()
+                        ->scalarNode('root')
+                            ->defaultValue('public/site')
+                        ->end()
+                    ->end()
+                ->end() // sitemap
             ->end()
         ;
 

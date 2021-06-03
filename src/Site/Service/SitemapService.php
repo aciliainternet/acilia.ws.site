@@ -8,20 +8,25 @@ use WS\Site\Library\Sitemap\SitemapProviderInterface;
 
 class SitemapService
 {
-    /**
-     * @var SitemapProviderInterface[];
-     */
-    protected $providers = null;
-    protected $router;
+    protected array $config;
+    protected ?array $providers = null;
+    protected UrlGeneratorInterface $router;
 
-    public function __construct(UrlGeneratorInterface $router)
+
+    public function __construct(array $config, UrlGeneratorInterface $router)
     {
+        $this->config = $config;
         $this->router = $router;
     }
 
     public function registerProvider(SitemapProviderInterface $provider)
     {
         $this->providers[] = $provider;
+    }
+
+    public function getRootPath(string $path = 'sitemap'): string
+    {
+        return sprintf('%s/%s/', $this->config['root'], $path);
     }
 
     public function getSitemap($locale)
