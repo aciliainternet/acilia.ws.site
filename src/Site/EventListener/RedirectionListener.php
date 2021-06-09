@@ -25,7 +25,7 @@ class RedirectionListener
 
     public function onRequest(RequestEvent $event)
     {
-        if (!$event->isMasterRequest()) {
+        if (!$event->isMainRequest()) {
             return;
         }
 
@@ -50,7 +50,7 @@ class RedirectionListener
 
     public function onController(ControllerEvent $event)
     {
-        if (!$event->isMasterRequest()) {
+        if (!$event->isMainRequest()) {
             return;
         }
 
