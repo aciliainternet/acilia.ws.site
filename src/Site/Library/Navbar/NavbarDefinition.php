@@ -28,7 +28,8 @@ class NavbarDefinition
             'order' => 999,
             'collapsed_routes' => [],
             'class' => '',
-            'hidden_mobile' => false
+            'hidden_mobile' => false,
+            'translate' => true
         ], $options);
     }
 
