@@ -12,11 +12,12 @@ use Twig\Environment;
 
 class WidgetService implements ActivityLogInterface
 {
-    protected $debug;
-    protected $em;
-    protected $twig;
-    protected $contextService;
-    protected $widgets = [];
+    protected bool $debug = false;
+    protected EntityManagerInterface $em;
+    protected Environment $twig;
+    protected ContextService $contextService;
+    protected array $widgets = [];
+    protected ?array $widgetConfigurations = null;
 
     public function __construct($debug, EntityManagerInterface $em, Environment $twig, ContextService $contextService)
     {
@@ -26,7 +27,7 @@ class WidgetService implements ActivityLogInterface
         $this->contextService = $contextService;
     }
 
-    public function addWidget(WidgetInterface $widget)
+    public function addWidget(WidgetInterface $widget): void
     {
         $this->widgets[$widget->getId()] = $widget;
     }
@@ -58,11 +59,7 @@ class WidgetService implements ActivityLogInterface
 
     public function render(string $code, array $context): ?string
     {
-        $configuration = $this->em->getRepository(WidgetConfiguration::class)->findOneBy([
-            'code' => $code,
-            'publishStatus' => PublishingEntityInterface::STATUS_PUBLISHED,
-            'domain' => $this->contextService->getDomain()
-        ]);
+        $configuration = $this->getWidgetConfiguration($code);
 
         if (! $configuration instanceof WidgetConfiguration) {
             return sprintf(' <!-- Widget Configuration with code "%s" not found --> ', $code);
@@ -81,7 +78,7 @@ class WidgetService implements ActivityLogInterface
 
             return $this->twig->render($template, $data);
         } catch (\Exception $e) {
-            if ($this->debug) {
+            if (true === $this->debug) {
                 throw $e;
             }
         }
@@ -97,5 +94,21 @@ class WidgetService implements ActivityLogInterface
     public function getActivityLogFields(): ?array
     {
         return ['name', 'widget', 'configuration'];
+    }
+
+    private function getWidgetConfiguration(string $code): ?WidgetConfiguration
+    {
+        if (null === $this->widgetConfigurations) {
+            $widgetConfigurations = $this->em->getRepository(WidgetConfiguration::class)->findBy([
+                'publishStatus' => PublishingEntityInterface::STATUS_PUBLISHED,
+                'domain' => $this->contextService->getDomain()
+            ]);
+
+            foreach ($widgetConfigurations as $widget) {
+                $this->widgetConfigurations[$widget->getCode()] = $widget;
+            }
+        }
+
+        return $this->widgetConfigurations[$code] ?? null;
     }
 }
