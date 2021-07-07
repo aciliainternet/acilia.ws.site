@@ -176,7 +176,7 @@ class SitemapService
         return $routes;
     }
 
-    protected function getUrlElement(string $route, string $frequency, int $priority, \DateTime $lastModified = null): Url
+    protected function getUrlElement(string $route, string $frequency, float $priority, \DateTime $lastModified = null): Url
     {
         $url = new Url();
         $url->setUrl($route)

@@ -69,6 +69,8 @@ class GenerateSitemapCommand extends Command
                     $canonicalDomainsDone[$domains[0]->getHost()] = true;
 
                     foreach ($domains as $domain) {
+                        $this->contextService->setDomain($domain);
+                        
                         $this->saveSitemaps(
                             $this->sitemapService->getSitemap($domain->getLocale()),
                             $domain->getHost(),
