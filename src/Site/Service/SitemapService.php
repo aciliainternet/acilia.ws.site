@@ -12,14 +12,13 @@ class SitemapService
     protected ?array $providers = null;
     protected UrlGeneratorInterface $router;
 
-
     public function __construct(array $config, UrlGeneratorInterface $router)
     {
         $this->config = $config;
         $this->router = $router;
     }
 
-    public function registerProvider(SitemapProviderInterface $provider)
+    public function registerProvider(SitemapProviderInterface $provider): void
     {
         $this->providers[] = $provider;
     }
@@ -29,7 +28,7 @@ class SitemapService
         return sprintf('%s/%s/', $this->config['root'], $path);
     }
 
-    public function getSitemap($locale)
+    public function getSitemap($locale): array
     {
         $xml = [];
         $root = $this->generateUrlSitemapDocument();
@@ -53,7 +52,7 @@ class SitemapService
         return $xml;
     }
 
-    public function generateRootSitemapDomainLocale(array $domains)
+    public function generateRootSitemapDomainLocale(array $domains): array
     {
         $root = $this->generateUrlSitemapDocument();
         $urlSet = $root->createElement('sitemapindex');
@@ -67,7 +66,7 @@ class SitemapService
         return $xml;
     }
 
-    protected function createSitemapIndex($length, $locale = null)
+    protected function createSitemapIndex($length, $locale = null): \DOMDocument
     {
         $root = $this->generateUrlSitemapDocument();
 
@@ -86,7 +85,7 @@ class SitemapService
         return $root;
     }
 
-    protected function createUrlSet(\DOMDocument $root, array $urls)
+    protected function createUrlSet(\DOMDocument $root, array $urls): void
     {
         $urlSet = $root->createElement('urlset');
 
@@ -97,7 +96,7 @@ class SitemapService
         $root->appendChild($urlSet);
     }
 
-    protected function generateUrlSitemapDocument() : \DOMDocument
+    protected function generateUrlSitemapDocument(): \DOMDocument
     {
         $sitemap = new \DOMDocument('1.0', 'UTF-8');
         $sitemap->preserveWhiteSpace = false;
@@ -106,7 +105,7 @@ class SitemapService
         return $sitemap;
     }
 
-    protected function getChildSitemapXml(\DOMDocument $root, string $index)
+    protected function getChildSitemapXml(\DOMDocument $root, string $index): \DOMElement
     {
         try {
             $now = new \DateTime('now');
@@ -120,7 +119,7 @@ class SitemapService
             new \DOMElement(
                 'loc',
                 $this->router->generate(
-                    'sitemap',
+                    'ws_site_seo_sitemap',
                     ['sitemap' => sprintf('sitemap-%s', $index)],
                     UrlGeneratorInterface::ABSOLUTE_URL
                 )
@@ -132,7 +131,7 @@ class SitemapService
         return $url;
     }
 
-    protected function getUrls($locale)
+    protected function getUrls($locale): array
     {
         $routes = $this->getRoutes($locale);
         $urls = [];
@@ -159,7 +158,7 @@ class SitemapService
         return $urls;
     }
 
-    protected function getRoutes($locale)
+    protected function getRoutes($locale): array
     {
         $routes = [];
 
@@ -177,7 +176,7 @@ class SitemapService
         return $routes;
     }
 
-    protected function getUrlElement($route, $frequency, $priority, \DateTime $lastModified = null)
+    protected function getUrlElement(string $route, string $frequency, int $priority, \DateTime $lastModified = null): Url
     {
         $url = new Url();
         $url->setUrl($route)
