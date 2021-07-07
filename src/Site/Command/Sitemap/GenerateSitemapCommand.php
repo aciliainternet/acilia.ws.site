@@ -15,12 +15,12 @@ use WS\Core\Service\SettingService;
 
 class GenerateSitemapCommand extends Command
 {
-    private $sitemapService;
-    private $settingService;
-    private $domainService;
-    private $router;
-    private $contextService;
-    private $projectDir;
+    private SitemapService $sitemapService;
+    private RouterInterface $router;
+    private SettingService $settingService;
+    private DomainService $domainService;
+    private ContextService $contextService;
+    private string $projectDir;
 
     public function __construct(
         SitemapService $sitemapService,
@@ -64,6 +64,7 @@ class GenerateSitemapCommand extends Command
 
                 $domains = $this->domainService->getByHost($canonicalDomain->getHost());
                 if (count($domains) > 1) {
+
                     $this->saveSitemaps($this->generateRootSitemapDomainLocale($domains), $canonicalDomain->getHost());
                     $canonicalDomainsDone[$domains[0]->getHost()] = true;
 
@@ -82,18 +83,22 @@ class GenerateSitemapCommand extends Command
                 }
             }
 
-            $io->success(sprintf('"%s - %s" sitemap created/updated successfully', $canonicalDomain->getHost(), $canonicalDomain->getLocale()));
+            $io->success(sprintf(
+                '"%s - %s" sitemap created/updated successfully',
+                $canonicalDomain->getHost(),
+                $canonicalDomain->getLocale())
+            );
         }
 
         return 0;
     }
 
-    private function generateRootSitemapDomainLocale($domains)
+    private function generateRootSitemapDomainLocale(array $domains): ?array
     {
         return $this->sitemapService->generateRootSitemapDomainLocale($domains);
     }
 
-    private function saveSitemaps($xml, $host, $locale = null)
+    private function saveSitemaps(array $xml, ?string $host, ?string $locale = null): void
     {
         $sitemapPath = sprintf('%s/%s', $this->projectDir, $this->sitemapService->getRootPath());
         if (!file_exists($sitemapPath)) {
