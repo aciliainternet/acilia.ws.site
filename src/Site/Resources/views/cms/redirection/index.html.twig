@@ -12,8 +12,11 @@
                 {% else %}
                     {{ attribute(entity, field.name)|date('date_hour_format'|trans({}, 'ws_cms')) }}
                 {% endif %}
+
             {% elseif field.name == 'domain' and attribute(entity, field.name) is empty%}
                 {{ attribute(entity, field.name) != '' ? attribute(entity, field.name) : '*' }}
+            {% elseif field.filter|default(false) %}
+                {{ ws_cms_crud_list_filter(field.filter, field.options|default([]), attribute(entity, field.name)) }}
             {% else %}
                 {{ attribute(entity, field.name) }}
             {% endif %}

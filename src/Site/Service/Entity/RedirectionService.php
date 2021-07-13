@@ -2,12 +2,17 @@
 
 namespace WS\Site\Service\Entity;
 
+use WS\Core\Entity\Domain;
 use WS\Site\Entity\Redirection;
 use WS\Site\Form\CMS\RedirectionType;
 use WS\Core\Library\CRUD\AbstractService;
+use WS\Site\Repository\RedirectionRepository;
 
 class RedirectionService extends AbstractService
 {
+    /** @var RedirectionRepository */
+    protected $repository;
+
     public function getEntityClass() : string
     {
         return Redirection::class;
@@ -29,12 +34,18 @@ class RedirectionService extends AbstractService
             ['name' => 'domain', 'sortable' => true],
             ['name' => 'origin', 'sortable' => true],
             ['name' => 'destination', 'sortable' => true],
+            ['name' => 'exactMatch', 'filter' => 'ws_redirection_exact_match_format'],
             ['name' => 'createdAt', 'sortable' => false, 'width' => 200, 'isDate' => true],
         ];
     }
 
-    public function getValidRedirection(string $url, string $host)
+    public function getExactRedirection(string $url, Domain $domain): ?Redirection
     {
-        return $this->repository->findValidRedirection($url, $host);
+        return $this->repository->findExactRedirection($url, $domain);
+    }
+
+    public function getRegexRedirection(string $url, Domain $domain): ?Redirection
+    {
+        return $this->repository->findRegexRedirection($url, $domain);
     }
 }
