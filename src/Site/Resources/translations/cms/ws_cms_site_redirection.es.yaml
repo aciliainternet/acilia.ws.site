@@ -8,6 +8,7 @@ fields.destination.placeholder: /destino
 fields.createdAt.label: Creado en
 fields.domain.label: Dominio
 fields.domain.placeholder: Todos los dominios
+fields.exactMatch.label: Coincidencia exacta
 create_success: Redirección creada
 create_error: Ha ocurrido un problema al crear la Redirección, por favor inténtelo de nuevo
 edit_success: Redirección editada
@@ -16,3 +17,5 @@ delete_warning: ¿Seguro que desea eliminar esta Redirección?
 delete_success: Redirección eliminado correctamente
 no_rows_found: No hay Redirecciones para mostrar
 not_found: No se pudo encontrar la Redirección con identificador %s
+form.exactMatch.option.no.label: No
+form.exactMatch.option.yes.label: Sí

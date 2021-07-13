@@ -4,6 +4,7 @@ namespace WS\Site\Repository;
 
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Query\ResultSetMapping;
+use WS\Core\Entity\Domain;
 use WS\Core\Library\CRUD\AbstractRepository;
 use WS\Site\Entity\Redirection;
 
@@ -25,12 +26,31 @@ class RedirectionRepository extends AbstractRepository
         return ['origin', 'destination'];
     }
 
-    public function findValidRedirection(string $url, string $host)
+    public function findExactRedirection(string $url, Domain $domain): ?Redirection
+    {
+        $alias = 'r';
+        $qb = $this->createQueryBuilder($alias)
+            ->where(sprintf('%s.exactMatch = true', $alias))
+            ->andWhere(sprintf('%s.origin = :origin', $alias))
+            ->andWhere(sprintf('%s.domain IS NULL OR %s.domain = :domain', $alias, $alias))
+            ->setParameter('origin', $url)
+            ->setParameter('domain', $domain)
+            ->setMaxResults(1);
+
+        try {
+            return $qb->getQuery()->getOneOrNullResult();
+        } catch (NonUniqueResultException $e) {
+            return null;
+        }
+    }
+
+    public function findRegexRedirection(string $url, Domain $domain): ?Redirection
     {
         $sql = 'SELECT redirection_id, redirection_origin, redirection_destination'
             . ' FROM ws_site_redirection r'
             . ' WHERE ? REGEXP CONCAT(\'^\', redirection_origin) '
-            . ' AND ( redirection_domain is null OR ? = redirection_domain)'
+            . ' AND (redirection_domain IS NULL OR ? = redirection_domain)'
+            . ' AND redirection_exact_match = 0'
             . ' LIMIT 1';
 
         $rsm = new ResultSetMapping();
@@ -42,7 +62,7 @@ class RedirectionRepository extends AbstractRepository
         try {
             $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
             $query->setParameter(1, $url);
-            $query->setParameter(2, $host);
+            $query->setParameter(2, $domain->getId());
 
             return $query->getOneOrNullResult();
         } catch (NonUniqueResultException $e) {

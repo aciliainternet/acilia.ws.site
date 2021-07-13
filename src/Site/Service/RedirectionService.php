@@ -4,8 +4,8 @@ namespace WS\Site\Service;
 
 use WS\Site\Entity\Redirection;
 use WS\Site\Service\Entity\RedirectionService as RedirectionEntityService;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use WS\Core\Entity\Domain;
 
 class RedirectionService
 {
@@ -25,18 +25,21 @@ class RedirectionService
         return $this->enabled;
     }
 
-    public function getRedirection(string $url, string $host): ?RedirectResponse
+    public function getRedirection(string $url, ?Domain $domain): ?array
     {
-        $redirection = $this->redirectionEntityService->getValidRedirection($url, $host);
+        // search for exact redirection
+        $redirection = $this->redirectionEntityService->getExactRedirection($url, $domain);
+        if (null === $redirection) {
+            // search for regex redirection
+            $redirection = $this->redirectionEntityService->getRegexRedirection($url, $domain);
+        }
 
         if ($redirection instanceof Redirection) {
-            return new RedirectResponse(
+            return [
                 $redirection->getDestination(),
                 Response::HTTP_MOVED_PERMANENTLY,
-                [
-                    self::REDIRECTION_ID => $redirection->getId()
-                ]
-            );
+                [self::REDIRECTION_ID => $redirection->getId()]
+            ];
         }
 
         return null;

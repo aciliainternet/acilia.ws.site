@@ -2,10 +2,12 @@
 
 namespace WS\Site\EventListener;
 
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Contracts\Cache\ItemInterface;
 use WS\Core\Service\ContextService;
 use WS\Core\Service\SettingService;
 use WS\Site\Service\RedirectionService;
@@ -42,9 +44,17 @@ class RedirectionListener
             $url = sprintf('%s?%s', $url, $event->getRequest()->getQueryString());
         }
 
-        $redirection = $this->redirectionService->getRedirection($url, $this->contextService->getDomain()->getId());
-        if ($redirection instanceof RedirectResponse) {
-            $event->setResponse($redirection);
+        $cache = new FilesystemAdapter();
+        $redirection = $cache->get(
+            sprintf('ws_redirection_%s_%d', md5($url), $this->contextService->getDomain()->getId()),
+            function (ItemInterface $item) use($url) {
+                $item->expiresAfter(3600);
+
+                return $this->redirectionService->getRedirection($url, $this->contextService->getDomain());
+        });
+        
+        if (null !== $redirection) {
+            $event->setResponse(new RedirectResponse(...$redirection));
         }
     }
 

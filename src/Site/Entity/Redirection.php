@@ -44,6 +44,11 @@ class Redirection
     private $destination;
 
     /**
+     * @ORM\Column(name="redirection_exact_match", type="boolean", nullable=false)
+     */
+    private $exactMatch = false;
+
+    /**
      * @Assert\Length(max=128)
      * @Gedmo\Blameable(on="create")
      * @ORM\Column(name="redirection_created_by", type="string", length=128, nullable=true)
@@ -93,6 +98,18 @@ class Redirection
     public function getDestination(): ?string
     {
         return $this->destination;
+    }
+
+    public function isExactMatch(): bool
+    {
+        return $this->exactMatch;
+    }
+
+    public function setExactMatch(bool $exactMatch): self
+    {
+        $this->exactMatch = $exactMatch;
+
+        return $this;
     }
 
     public function setDomain(?Domain $domain): self
