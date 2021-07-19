@@ -9,19 +9,26 @@ use WS\Core\Service\ContextService;
 use WS\Core\Library\CRUD\AbstractService;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use WS\Site\Service\WidgetService;
 
 class WidgetConfigurationService extends AbstractService
 {
+    public const WIDGET_CACHE_KEY = 'ws_widget_configuration';
     protected $widgetService;
 
-    public function __construct(LoggerInterface $logger, EntityManagerInterface $em, ContextService $contextService, WidgetService $widgetService)
-    {
+    public function __construct(
+        LoggerInterface $logger,
+        EntityManagerInterface $em,
+        ContextService $contextService,
+        WidgetService $widgetService
+    ) {
         $this->widgetService = $widgetService;
+
         parent::__construct($logger, $em, $contextService);
     }
 
-    public function getEntityClass() : string
+    public function getEntityClass(): string
     {
         return WidgetConfiguration::class;
     }
@@ -31,12 +38,12 @@ class WidgetConfigurationService extends AbstractService
         return WidgetConfigurationType::class;
     }
 
-    public function getSortFields() : array
+    public function getSortFields(): array
     {
         return ['code'];
     }
 
-    public function getListFields() : array
+    public function getListFields(): array
     {
         return [
             ['name' => 'name'],
@@ -46,7 +53,7 @@ class WidgetConfigurationService extends AbstractService
         ];
     }
 
-    public function getImageEntityClass($entity) : ?string
+    public function getImageEntityClass($entity): ?string
     {
         if (!$entity instanceof WidgetConfiguration) {
             return null;
@@ -73,5 +80,11 @@ class WidgetConfigurationService extends AbstractService
         } catch (\Exception $e) {
             return [];
         }
+    }
+
+    public function invalidateCache(int $id): void
+    {
+        $cache = new FilesystemAdapter();
+        $cache->delete(sprintf('%s_%d', self::WIDGET_CACHE_KEY, $id));
     }
 }
