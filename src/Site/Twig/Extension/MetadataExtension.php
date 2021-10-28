@@ -11,16 +11,14 @@ use Twig\Extension\AbstractExtension;
 
 class MetadataExtension extends AbstractExtension
 {
-    protected $metadataConsumerService;
-    protected $metaTagsService;
+    protected MetadataConsumerService $metadataConsumerService;
 
     public function __construct(MetadataConsumerService $metadataConsumerService)
     {
         $this->metadataConsumerService = $metadataConsumerService;
-
     }
 
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('get_metadata_title', [$this, 'getTitle'], ['is_safe' => ['html']]),
@@ -33,44 +31,44 @@ class MetadataExtension extends AbstractExtension
         ];
     }
 
-    public function getTitle($entity)
+    public function getTitle($entity): ?string
     {
         return $this->metadataConsumerService->getMetadataService()->getTitle($entity);
     }
 
-    public function getDescription($entity)
+    public function getDescription($entity): ?string
     {
         return $this->metadataConsumerService->getMetadataService()->getDescription($entity);
     }
 
-    public function getKeywords($entity)
+    public function getKeywords($entity): ?string
     {
         return $this->metadataConsumerService->getMetadataService()->getKeywords($entity);
     }
 
-    public function getOpenGraphTitle($entity)
+    public function getOpenGraphTitle($entity): ?string
     {
         return $this->metadataConsumerService->getMetadataService()->getOpenGraphTitle($entity);
     }
 
-    public function getOpenGraphType($entity)
+    public function getOpenGraphType($entity): ?string
     {
         return $this->metadataConsumerService->getMetadataService()->getOpenGraphType($entity);
     }
 
-    public function getOpengraphImage($entity)
+    public function getOpengraphImage($entity): ?string
     {
         return $this->metadataConsumerService->getMetadataService()->getOpengraphImage($entity);
     }
 
-    public function getTokenParsers()
+    public function getTokenParsers(): array
     {
         return [
             new MetaTagsTokenParser(),
         ];
     }
 
-    public function renderMetaTags(Environment $environment)
+    public function renderMetaTags(Environment $environment): string
     {
         $config = $this->metadataConsumerService->getMetaTagsService()->compileConfiguration();
         $customTags = $this->metadataConsumerService->getMetaTagsService()->getCustomTags();
@@ -85,7 +83,7 @@ class MetadataExtension extends AbstractExtension
         }
     }
 
-    public function configure($configuration)
+    public function configure($configuration): void
     {
         $this->metadataConsumerService->getMetaTagsService()->configure($configuration);
     }

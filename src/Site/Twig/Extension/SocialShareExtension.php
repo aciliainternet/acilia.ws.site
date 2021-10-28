@@ -9,8 +9,8 @@ use Twig\TwigFunction;
 
 class SocialShareExtension extends AbstractExtension
 {
-    protected $settingService;
-    protected $translator;
+    protected SettingService $settingService;
+    protected TranslatorInterface $translator;
 
     public function __construct(SettingService $settingService, TranslatorInterface $translator)
     {
@@ -18,7 +18,7 @@ class SocialShareExtension extends AbstractExtension
         $this->translator = $translator;
     }
 
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('twitter_link', [$this, 'getTwitterLink']),
@@ -27,7 +27,7 @@ class SocialShareExtension extends AbstractExtension
         ];
     }
 
-    public function getTwitterLink($path, $text = '')
+    public function getTwitterLink($path, $text = ''): string
     {
         $twitterName = $this->settingService->get('social_twitter_profile');
 
@@ -40,12 +40,12 @@ class SocialShareExtension extends AbstractExtension
         );
     }
 
-    public function getFacebookLink($path)
+    public function getFacebookLink($path): string
     {
         return sprintf('https://www.facebook.com/sharer/sharer.php?u=%s&amp;src=sdkpreparse', $path);
     }
 
-    public function getEmailLink($title, $path)
+    public function getEmailLink($title, $path): string
     {
         return sprintf(
             'mailto:?subject=%s%s&amp;body=%s %s',

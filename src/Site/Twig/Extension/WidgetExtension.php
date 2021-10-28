@@ -8,21 +8,21 @@ use Twig\TwigFunction;
 
 class WidgetExtension extends AbstractExtension
 {
-    protected $widgetService;
+    protected WidgetService $widgetService;
 
     public function __construct(WidgetService $widgetService)
     {
         $this->widgetService = $widgetService;
     }
 
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('render_widget', [$this, 'renderWidget'], ['is_safe' => ['html']]),
         ];
     }
 
-    public function renderWidget(string $code, array $context = []) : ?string
+    public function renderWidget(string $code, array $context = []): ?string
     {
         return $this->widgetService->render($code, $context);
     }

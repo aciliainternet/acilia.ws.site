@@ -40,14 +40,14 @@ class GenerateSitemapCommand extends Command
         $this->projectDir = $parameterBag->get('kernel.project_dir');
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('ws:sitemap:generate')
             ->setDescription('Generate the xml sitemap of the site');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
         $context = $this->router->getContext();
@@ -70,7 +70,7 @@ class GenerateSitemapCommand extends Command
 
                     foreach ($domains as $domain) {
                         $this->contextService->setDomain($domain);
-                        
+
                         $this->saveSitemaps(
                             $this->sitemapService->getSitemap($domain->getLocale()),
                             $domain->getHost(),

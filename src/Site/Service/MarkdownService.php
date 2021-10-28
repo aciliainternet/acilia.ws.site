@@ -6,14 +6,14 @@ use Parsedown;
 
 class MarkdownService
 {
-    private $parser;
+    private Parsedown $parser;
 
     public function __construct()
     {
         $this->parser = new Parsedown();
     }
 
-    public function parse($markdown)
+    public function parse($markdown): string
     {
         return $this->parser->parse($markdown);
     }
