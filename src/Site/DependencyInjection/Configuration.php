@@ -10,6 +10,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('ws_site');
+        
         $root = $treeBuilder->getRootNode();
         $root
             ->children()
