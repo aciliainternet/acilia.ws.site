@@ -2,7 +2,6 @@
 
 namespace WS\Site\Twig\Extension;
 
-
 use WS\Site\Service\MetadataConsumerService;
 use WS\Site\Twig\Tag\MetaTags\MetaTagsTokenParser;
 use Twig\TwigFunction;
@@ -11,16 +10,14 @@ use Twig\Extension\AbstractExtension;
 
 class MetadataExtension extends AbstractExtension
 {
-    protected $metadataConsumerService;
-    protected $metaTagsService;
+    protected MetadataConsumerService $metadataConsumerService;
 
     public function __construct(MetadataConsumerService $metadataConsumerService)
     {
         $this->metadataConsumerService = $metadataConsumerService;
-
     }
 
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('get_metadata_title', [$this, 'getTitle'], ['is_safe' => ['html']]),

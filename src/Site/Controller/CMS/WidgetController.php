@@ -17,7 +17,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class WidgetController extends AbstractController
 {
-    protected $service;
     protected WidgetService $widgetService;
 
     public function __construct(WidgetConfigurationService $service, WidgetService $widgetService)

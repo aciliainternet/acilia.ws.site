@@ -7,7 +7,7 @@ use WS\Core\Library\Sidebar\SidebarDefinitionInterface;
 
 class SidebarDefinitionService implements SidebarDefinitionInterface
 {
-    protected $redirectionService;
+    protected RedirectionService $redirectionService;
 
     public function __construct(RedirectionService $redirectionService)
     {

@@ -13,11 +13,8 @@ class RobotsController extends AbstractController
 {
     /**
      * @Route("/robots.txt", name="robots")
-     *
-     * @return Response
-     * @throws \Exception
      */
-    public function robots()
+    public function robots(): Response
     {
         $response = $this->render('@WSSite/site/robots/robots.txt.twig');
         $response->headers->set('Content-Type', 'text/plain');
@@ -26,11 +23,8 @@ class RobotsController extends AbstractController
 
     /**
      * @Route("/humans.txt", name="humans")
-     *
-     * @return Response
-     * @throws \Exception
      */
-    public function humans()
+    public function humans(): Response
     {
         $response = $this->render('@WSSite/site/robots/humans.txt.twig');
         $response->headers->set('Content-Type', 'text/plain');

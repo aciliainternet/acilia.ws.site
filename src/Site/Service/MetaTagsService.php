@@ -4,9 +4,9 @@ namespace WS\Site\Service;
 
 class MetaTagsService
 {
-    protected $markdownService;
-    protected $config;
-    protected $custom;
+    protected MarkdownService $markdownService;
+    protected array $config;
+    protected array $custom;
 
     public function __construct(MarkdownService $markdownService)
     {
@@ -32,28 +32,24 @@ class MetaTagsService
         $this->custom = [];
     }
 
-    public function setCustom($tag, $value)
+    public function setCustom($tag, $value): void
     {
         $this->custom[$tag] = $value;
-
-        return $this;
     }
 
-    public function setCustoms(array $tags)
+    public function setCustoms(array $tags): void
     {
         foreach ($tags as $tag => $value) {
             $this->setCustom($tag, $value);
         }
-
-        return $this;
     }
 
-    public function getCustomTags()
+    public function getCustomTags(): array
     {
         return $this->custom;
     }
 
-    public function configure($configuration)
+    public function configure($configuration): void
     {
         $order = (isset($configuration['order'])) ? $configuration['order'] : 0;
 
@@ -66,7 +62,7 @@ class MetaTagsService
         }
     }
 
-    public function compileConfiguration()
+    public function compileConfiguration(): array
     {
         krsort($this->config);
         $config = [];
@@ -132,6 +128,7 @@ class MetaTagsService
         $content = $this->markdownService->parse($content);
         $content = strip_tags($content);
         $content = trim($content);
+        
         return $content;
     }
 }

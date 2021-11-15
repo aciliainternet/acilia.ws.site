@@ -6,7 +6,7 @@ use WS\Site\Library\Metadata\MetadataProviderInterface;
 
 class MetadataService
 {
-    protected $providers;
+    protected array $providers;
 
     public function registerProvider(MetadataProviderInterface $provider)
     {
@@ -15,7 +15,7 @@ class MetadataService
         }
     }
 
-    public function getTitle($element)
+    public function getTitle($element): ?string
     {
         if ($this->hasProvider($element)) {
             $provider = $this->getProvider($element);
@@ -25,7 +25,7 @@ class MetadataService
         return null;
     }
 
-    public function getDescription($element)
+    public function getDescription($element): ?string
     {
         if ($this->hasProvider($element)) {
             $provider = $this->getProvider($element);
@@ -35,7 +35,7 @@ class MetadataService
         return null;
     }
 
-    public function getKeywords($element)
+    public function getKeywords($element): ?string
     {
         if ($this->hasProvider($element)) {
             $provider = $this->getProvider($element);
@@ -45,7 +45,7 @@ class MetadataService
         return null;
     }
 
-    public function getOpenGraphTitle($element)
+    public function getOpenGraphTitle($element): ?string
     {
         if ($this->hasProvider($element)) {
             $provider = $this->getProvider($element);
@@ -55,7 +55,7 @@ class MetadataService
         return null;
     }
 
-    public function getOpenGraphType($element)
+    public function getOpenGraphType($element): ?string
     {
         if ($this->hasProvider($element)) {
             $provider = $this->getProvider($element);
@@ -65,7 +65,7 @@ class MetadataService
         return null;
     }
 
-    public function getOpenGraphImage($element)
+    public function getOpenGraphImage($element): ?string
     {
         if ($this->hasProvider($element)) {
             $provider = $this->getProvider($element);
@@ -75,7 +75,7 @@ class MetadataService
         return null;
     }
 
-    public function getOpenGraphImageWidth($element)
+    public function getOpenGraphImageWidth($element): ?int
     {
         if ($this->hasProvider($element)) {
             $provider = $this->getProvider($element);
@@ -85,7 +85,7 @@ class MetadataService
         return null;
     }
 
-    public function getOpenGraphImageHeight($element)
+    public function getOpenGraphImageHeight($element): ?int
     {
         if ($this->hasProvider($element)) {
             $provider = $this->getProvider($element);
@@ -95,7 +95,7 @@ class MetadataService
         return null;
     }
 
-    protected function hasProvider($element)
+    protected function hasProvider($element): bool
     {
         if (is_object($element)) {
             return array_key_exists(get_class($element), $this->providers);
@@ -106,7 +106,7 @@ class MetadataService
         return false;
     }
 
-    protected function getProvider($element) : MetadataProviderInterface
+    protected function getProvider($element): MetadataProviderInterface
     {
         return $this->providers[get_class($element)];
     }

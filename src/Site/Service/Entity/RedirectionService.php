@@ -10,10 +10,7 @@ use WS\Site\Repository\RedirectionRepository;
 
 class RedirectionService extends AbstractService
 {
-    /** @var RedirectionRepository */
-    protected $repository;
-
-    public function getEntityClass() : string
+    public function getEntityClass(): string
     {
         return Redirection::class;
     }
@@ -23,7 +20,7 @@ class RedirectionService extends AbstractService
         return RedirectionType::class;
     }
 
-    public function getSortFields() : array
+    public function getSortFields(): array
     {
         return ['origin'];
     }

@@ -15,7 +15,7 @@ use WS\Site\Service\WidgetService;
 class WidgetConfigurationService extends AbstractService
 {
     public const WIDGET_CACHE_KEY = 'ws_widget_configuration';
-    protected $widgetService;
+    protected WidgetService $widgetService;
 
     public function __construct(
         LoggerInterface $logger,

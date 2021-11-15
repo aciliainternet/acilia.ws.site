@@ -11,6 +11,7 @@ use WS\Core\Library\Traits\Entity\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use WS\Core\Entity\Domain;
 
 /**
  * @ORM\Entity(repositoryClass="WS\Site\Repository\WidgetConfigurationRepository")
@@ -29,13 +30,13 @@ class WidgetConfiguration implements DomainDependantInterface, PublishingEntityI
      * @ORM\GeneratedValue()
      * @ORM\Column(name="config_id", type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="WS\Core\Entity\Domain")
      * @ORM\JoinColumn(name="config_domain", referencedColumnName="domain_id", nullable=false)
      */
-    private $domain;
+    private Domain $domain;
 
     /**
      * @Assert\NotBlank()
@@ -43,12 +44,12 @@ class WidgetConfiguration implements DomainDependantInterface, PublishingEntityI
      *
      * @ORM\Column(name="config_name", type="string", length=64, nullable=false)
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(name="config_widget", type="string", length=64, nullable=false)
      */
-    private $widget;
+    private string $widget;
 
     /**
      * @Assert\NotBlank()
@@ -56,12 +57,12 @@ class WidgetConfiguration implements DomainDependantInterface, PublishingEntityI
      *
      * @ORM\Column(name="config_code", type="string", length=64, nullable=false)
      */
-    private $code;
+    private string $code;
 
     /**
      * @ORM\Column(name="config_configuration", type="json_array", nullable=false)
      */
-    private $configuration;
+    private array $configuration;
 
     /**
      * @Assert\NotBlank()
@@ -69,37 +70,29 @@ class WidgetConfiguration implements DomainDependantInterface, PublishingEntityI
      *
      * @ORM\Column(name="config_publish_status", type="string", length=32, nullable=false)
      */
-    private $publishStatus;
+    private string $publishStatus;
 
     /**
-     * @Assert\Type("DateTime")
-     *
      * @ORM\Column(name="config_publish_since", type="datetime", nullable=true)
      */
-    private $publishSince;
+    private ?\DateTimeInterface $publishSince;
 
     /**
-     * @Assert\Type("DateTime")
-     *
      * @ORM\Column(name="config_publish_until", type="datetime", nullable=true)
      */
-    private $publishUntil;
+    private ?\DateTimeInterface $publishUntil;
 
     /**
-     * @Assert\Type("DateTime")
-     *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="config_created_at", type="datetime", nullable=false)
      */
-    private $createdAt;
+    private \DateTimeInterface $createdAt;
 
     /**
-     * @Assert\Type("DateTime")
-     *
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(name="config_modified_at", type="datetime", nullable=false)
      */
-    private $modifiedAt;
+    private \DateTimeInterface $modifiedAt;
 
     /**
      * @Assert\Length(max=128)
@@ -108,60 +101,60 @@ class WidgetConfiguration implements DomainDependantInterface, PublishingEntityI
      */
     private $createdBy;
 
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->name;
     }
 
-    public function getId() : ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getName() : ?string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(?string $name) : self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function setWidget(?string $widget) : self
+    public function setWidget(?string $widget): self
     {
         $this->widget = $widget;
 
         return $this;
     }
 
-    public function getWidget() : ?string
+    public function getWidget(): ?string
     {
         return $this->widget;
     }
 
-    public function setCode(?string $code) : self
+    public function setCode(?string $code): self
     {
         $this->code = $code;
 
         return $this;
     }
 
-    public function getCode() : ?string
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
-    public function setConfiguration(?array $configuration) : self
+    public function setConfiguration(?array $configuration): self
     {
         $this->configuration = $configuration;
 
         return $this;
     }
 
-    public function getConfiguration() : ?array
+    public function getConfiguration(): ?array
     {
         return $this->configuration;
     }

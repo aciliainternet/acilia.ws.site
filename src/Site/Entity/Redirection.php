@@ -23,45 +23,43 @@ class Redirection
      * @ORM\GeneratedValue()
      * @ORM\Column(name="redirection_id", type="integer")
      */
-    protected $id;
+    protected int $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="WS\Core\Entity\Domain")
      * @ORM\JoinColumn(name="redirection_domain", referencedColumnName="domain_id", nullable=true)
      */
-    private $domain;
+    private ?Domain $domain = null;
 
     /**
      * @Assert\Length(max=190)
      * @ORM\Column(name="redirection_origin", type="string", length=190, nullable=false)
      */
-    private $origin;
+    private string $origin;
 
     /**
      * @Assert\Length(max=256)
      * @ORM\Column(name="redirection_destination", type="string", length=256, nullable=false)
      */
-    private $destination;
+    private string $destination;
 
     /**
      * @ORM\Column(name="redirection_exact_match", type="boolean", nullable=false)
      */
-    private $exactMatch = false;
+    private bool $exactMatch = false;
 
     /**
      * @Assert\Length(max=128)
      * @Gedmo\Blameable(on="create")
      * @ORM\Column(name="redirection_created_by", type="string", length=128, nullable=true)
      */
-    private $createdBy;
+    private ?string $createdBy;
 
     /**
-     * @Assert\Type("DateTime")
-     *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="redirection_created_at", type="datetime")
      */
-    private $createdAt;
+    private \DateTimeInterface $createdAt;
 
     /**
      * @Assert\Type("DateTime")
@@ -69,9 +67,9 @@ class Redirection
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(name="redirection_modified_at", type="datetime")
      */
-    private $modifiedAt;
+    private \DateTimeInterface $modifiedAt;
 
-    public function getId() : ?int
+    public function getId(): ?int
     {
         return $this->id;
     }

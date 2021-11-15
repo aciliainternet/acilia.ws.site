@@ -7,15 +7,15 @@ use WS\Site\Library\Navbar\NavbarDefinitionInterface;
 
 class NavbarService
 {
-    protected $services = [];
-    protected $navbar = null;
+    protected array $services = [];
+    protected ?array $navbar = null;
 
-    public function registerNavbarDefinition(NavbarDefinitionInterface $service)
+    public function registerNavbarDefinition(NavbarDefinitionInterface $service): void
     {
         $this->services[] = $service;
     }
 
-    public function getNavbarDefinition(string $containerCode, ?string $contentCode = null) : ?NavbarDefinition
+    public function getNavbarDefinition(string $containerCode, ?string $contentCode = null): ?NavbarDefinition
     {
         // load navbar definitions when used
         $this->loadNavbarDefinitions();
@@ -46,7 +46,7 @@ class NavbarService
         return null;
     }
 
-    public function removeNavbarDefinition(string $containerCode, ?string $contentCode = null)
+    public function removeNavbarDefinition(string $containerCode, ?string $contentCode = null): void
     {
         // load navbar definitions when used
         $this->loadNavbarDefinitions();
@@ -70,7 +70,7 @@ class NavbarService
         }
     }
 
-    public function getNavbar() : array
+    public function getNavbar(): array
     {
         // load navbar definitions when used
         $this->loadNavbarDefinitions();
@@ -107,7 +107,7 @@ class NavbarService
         return $navbar;
     }
 
-    protected function loadNavbarDefinitions()
+    protected function loadNavbarDefinitions(): void
     {
         if ($this->navbar === null) {
             $this->navbar = [];

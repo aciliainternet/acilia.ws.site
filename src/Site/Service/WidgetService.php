@@ -19,8 +19,12 @@ class WidgetService implements ActivityLogInterface
     protected array $widgets = [];
     protected ?array $widgetConfigurations = null;
 
-    public function __construct($debug, EntityManagerInterface $em, Environment $twig, ContextService $contextService)
-    {
+    public function __construct(
+        bool $debug,
+        EntityManagerInterface $em,
+        Environment $twig,
+        ContextService $contextService
+    ) {
         $this->debug = $debug;
         $this->em = $em;
         $this->twig = $twig;

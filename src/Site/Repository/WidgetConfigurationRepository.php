@@ -20,27 +20,23 @@ class WidgetConfigurationRepository extends AbstractRepository
     use DomainRepositoryTrait;
     use PublishingRepositoryTrait;
 
-    public function getEntityClass()
+    public function getEntityClass(): string
     {
         return WidgetConfiguration::class;
     }
 
-    public function getFilterFields()
+    public function getFilterFields(): array
     {
         return ['name'];
     }
 
-    /**
-     * @param Domain $domain
-     * @param array|null $filters
-     * @param array|null $orderBy
-     * @param int|null $limit
-     * @param int|null $offset
-     *
-     * @return QueryBuilder
-     */
-    public function getAvailableQuery(Domain $domain, array $filters = null, array $orderBy = null, int $limit = null, int $offset = null)
-    {
+    public function getAvailableQuery(
+        Domain $domain,
+         array $filters = null,
+         array $orderBy = null,
+         int $limit = null,
+         int $offset = null
+    ): QueryBuilder {
         $alias = 'wc';
         $qb = $this->createQueryBuilder($alias);
 

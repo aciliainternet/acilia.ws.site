@@ -16,12 +16,12 @@ use WS\Site\Entity\Redirection;
  */
 class RedirectionRepository extends AbstractRepository
 {
-    public function getEntityClass()
+    public function getEntityClass(): string
     {
         return Redirection::class;
     }
 
-    public function getFilterFields()
+    public function getFilterFields(): array
     {
         return ['origin', 'destination'];
     }

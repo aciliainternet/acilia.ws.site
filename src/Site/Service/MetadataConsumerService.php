@@ -4,8 +4,8 @@ namespace WS\Site\Service;
 
 class MetadataConsumerService
 {
-    protected $metadataService;
-    protected $metaTagsService;
+    protected MetadataService $metadataService;
+    protected MetaTagsService $metaTagsService;
 
     public function __construct(MetadataService $metadataService, MetaTagsService $metaTagsService)
     {

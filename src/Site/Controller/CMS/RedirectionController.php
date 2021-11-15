@@ -12,8 +12,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class RedirectionController extends AbstractController
 {
-    protected $service;
-
     public function __construct(RedirectionService $service)
     {
         $this->service = $service;

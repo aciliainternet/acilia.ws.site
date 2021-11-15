@@ -15,8 +15,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class AddDefaultCommand extends Command
 {
-    protected $em;
-    protected $domainService;
+    protected EntityManagerInterface $em;
+    protected DomainService $domainService;
 
     public function __construct(EntityManagerInterface $em, DomainService $domainService)
     {
@@ -26,7 +26,7 @@ class AddDefaultCommand extends Command
         parent::__construct();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('ws:widget:add-default')
@@ -35,7 +35,7 @@ class AddDefaultCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 

@@ -9,12 +9,12 @@ use WS\Core\Entity\Domain;
 
 class RedirectionService
 {
-    protected $redirectionEntityService;
-    protected $enabled;
+    protected bool $enabled;
+    protected RedirectionEntityService $redirectionEntityService;
 
     const REDIRECTION_ID = 'x-ws-redirection-id';
 
-    public function __construct($enabled, RedirectionEntityService $redirectionService)
+    public function __construct(bool $enabled, RedirectionEntityService $redirectionService)
     {
         $this->redirectionEntityService = $redirectionService;
         $this->enabled = $enabled;
