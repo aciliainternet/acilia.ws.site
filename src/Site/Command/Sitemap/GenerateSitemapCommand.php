@@ -37,7 +37,7 @@ class GenerateSitemapCommand extends Command
         $this->domainService = $domainService;
         $this->router = $router;
         $this->contextService = $contextService;
-        $this->projectDir = $parameterBag->get('kernel.project_dir');
+        $this->projectDir = \strval($parameterBag->get('kernel.project_dir'));
     }
 
     protected function configure(): void
@@ -95,7 +95,7 @@ class GenerateSitemapCommand extends Command
         return 0;
     }
 
-    private function generateRootSitemapDomainLocale(array $domains): ?array
+    private function generateRootSitemapDomainLocale(array $domains): array
     {
         return $this->sitemapService->generateRootSitemapDomainLocale($domains);
     }

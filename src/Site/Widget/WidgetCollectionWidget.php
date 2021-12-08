@@ -11,29 +11,29 @@ use WS\Site\Repository\WidgetConfigurationRepository;
 
 class WidgetCollectionWidget implements WidgetInterface
 {
-    protected $contextService;
+    protected ContextService $contextService;
 
     public function __construct(ContextService $contextService)
     {
         $this->contextService = $contextService;
     }
 
-    public function getId() : string
+    public function getId(): string
     {
         return 'widget_collection';
     }
 
-    public function getIcon() : string
+    public function getIcon(): string
     {
         return 'fas fa-bars';
     }
 
-    public function getTranslationDomain() : string
+    public function getTranslationDomain(): string
     {
         return 'ws_cms_site';
     }
 
-    public function getDefinition(FormBuilderInterface $builder) : void
+    public function getDefinition(FormBuilderInterface $builder): void
     {
         $builder
             ->add('widgets', EntityType::class, [
@@ -52,12 +52,12 @@ class WidgetCollectionWidget implements WidgetInterface
             ]);
     }
 
-    public function getTemplate(WidgetConfiguration $configuration) : string
+    public function getTemplate(WidgetConfiguration $configuration): string
     {
         return '@WSSite/widgets/widget_collection.html.twig';
     }
 
-    public function getData(WidgetConfiguration $configuration) : array
+    public function getData(WidgetConfiguration $configuration): array
     {
         $data = [
             'widgets' => [],
@@ -72,7 +72,7 @@ class WidgetCollectionWidget implements WidgetInterface
         return $data;
     }
 
-    public function getImageFields() : array
+    public function getImageFields(): array
     {
         return [];
     }

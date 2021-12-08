@@ -14,18 +14,21 @@ use WS\Site\Service\RedirectionService;
 
 class RedirectionListener
 {
-    protected $redirectionService;
-    protected $contextService;
-    protected $settingService;
+    protected RedirectionService  $redirectionService;
+    protected ContextService $contextService;
+    protected SettingService$settingService;
 
-    public function __construct(RedirectionService $redirectionService, ContextService $contextService, SettingService $settingService)
-    {
+    public function __construct(
+        RedirectionService $redirectionService,
+        ContextService $contextService,
+        SettingService $settingService
+    ) {
         $this->redirectionService = $redirectionService;
         $this->contextService = $contextService;
         $this->settingService = $settingService;
     }
 
-    public function onRequest(RequestEvent $event)
+    public function onRequest(RequestEvent $event): void
     {
         if (!$event->isMainRequest()) {
             return;
@@ -52,13 +55,13 @@ class RedirectionListener
 
                 return $this->redirectionService->getRedirection($url, $this->contextService->getDomain());
         });
-        
+
         if (null !== $redirection) {
             $event->setResponse(new RedirectResponse(...$redirection));
         }
     }
 
-    public function onController(ControllerEvent $event)
+    public function onController(ControllerEvent $event): void
     {
         if (!$event->isMainRequest()) {
             return;

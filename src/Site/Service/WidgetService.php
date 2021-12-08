@@ -36,12 +36,12 @@ class WidgetService implements ActivityLogInterface
         $this->widgets[$widget->getId()] = $widget;
     }
 
-    public function isRegistered($id): bool
+    public function isRegistered(string $id): bool
     {
         return array_key_exists($id, $this->widgets);
     }
 
-    public function getWidget($id): WidgetInterface
+    public function getWidget(string $id): WidgetInterface
     {
         if (!array_key_exists($id, $this->widgets)) {
             throw new \Exception(sprintf('There is no Widget registered with id "%s"', $id));

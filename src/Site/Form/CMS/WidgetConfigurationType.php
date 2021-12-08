@@ -21,14 +21,14 @@ class WidgetConfigurationType extends AbstractType
 {
     use PublishingFormTrait;
 
-    protected $factoryService;
+    protected FactoryCollectorService $factoryService;
 
     public function __construct(FactoryCollectorService $factoryService)
     {
         $this->factoryService = $factoryService;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if ($options['widget'] === null) {
             throw new InvalidConfigurationException('The options "widget" is required.');
@@ -146,7 +146,7 @@ class WidgetConfigurationType extends AbstractType
         });
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => WidgetConfiguration::class,

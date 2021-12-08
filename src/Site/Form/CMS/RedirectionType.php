@@ -19,7 +19,7 @@ class RedirectionType extends AbstractType
 {
     use MetadataFormTrait;
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('domain', EntityType::class, [
@@ -77,7 +77,7 @@ class RedirectionType extends AbstractType
         });
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Redirection::class

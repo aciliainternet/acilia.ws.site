@@ -18,6 +18,7 @@ class RobotsController extends AbstractController
     {
         $response = $this->render('@WSSite/site/robots/robots.txt.twig');
         $response->headers->set('Content-Type', 'text/plain');
+
         return $response;
     }
 
@@ -28,6 +29,7 @@ class RobotsController extends AbstractController
     {
         $response = $this->render('@WSSite/site/robots/humans.txt.twig');
         $response->headers->set('Content-Type', 'text/plain');
+        
         return $response;
     }
 }

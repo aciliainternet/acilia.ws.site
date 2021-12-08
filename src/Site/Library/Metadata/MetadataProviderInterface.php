@@ -9,19 +9,19 @@ interface MetadataProviderInterface
 
     public function getMetadataSupportFor(): array;
 
-    public function getMetadataTitle($element): ?string;
+    public function getMetadataTitle(object $element): ?string;
 
-    public function getMetadataDescription($element): ?string;
+    public function getMetadataDescription(object $element): ?string;
 
-    public function getMetadataKeywords($element): ?string;
+    public function getMetadataKeywords(object $element): ?string;
 
-    public function getOpenGraphTitle($element): ?string;
+    public function getOpenGraphTitle(object $element): ?string;
 
-    public function getOpenGraphType($element): ?string;
+    public function getOpenGraphType(object $element): ?string;
 
-    public function getOpenGraphImage($element): ?string;
+    public function getOpenGraphImage(object $element): ?string;
 
-    public function getOpenGraphImageWidth($element): ?int;
+    public function getOpenGraphImageWidth(object $element): ?int;
 
-    public function getOpenGraphImageHeight($element): ?int;
+    public function getOpenGraphImageHeight(object  $element): ?int;
 }

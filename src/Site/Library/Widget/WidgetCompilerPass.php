@@ -11,7 +11,7 @@ class WidgetCompilerPass implements CompilerPassInterface
 {
     const TAG = 'ws.site.widget';
 
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->has(WidgetService::class)) {
             return;

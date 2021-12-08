@@ -2,6 +2,8 @@
 
 namespace WS\Site\Library\Sitemap;
 
+use DOMElement;
+
 class Url
 {
     const SCHEMA = 'http://www.sitemaps.org/schemas/sitemap/0.9';
@@ -14,84 +16,59 @@ class Url
     const FREQUENCY_YEARLY  = 'yearly';
     const FREQUENCY_NEVER   = 'never';
 
-    protected $url;
-    protected $lastModified;
-    protected $frequency;
-    protected $priority;
+    protected string $url;
+    protected \DateTime $lastModified;
+    protected string $frequency;
+    protected float $priority;
 
-    /**
-     * @return string
-     */
-    public function getUrl()
+    public function getUrl(): string
     {
         return $this->url;
     }
 
-    /**
-     * @param string $url
-     * @return Url
-     */
-    public function setUrl($url)
+    public function setUrl(string $url): self
     {
         $this->url = $url;
+
         return $this;
     }
-
-    /**
-     * @return \DateTime
-     */
-    public function getLastModified()
+    public function getLastModified(): \DateTime
     {
         return $this->lastModified;
     }
 
-    /**
-     * @param \DateTime $lastModified
-     * @return Url
-     */
-    public function setLastModified(\DateTime $lastModified)
+    public function setLastModified(\DateTime $lastModified): self
     {
         $this->lastModified = $lastModified;
+
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getFrequency()
+    public function getFrequency(): string
     {
         return $this->frequency;
     }
 
-    /**
-     * @param string $frequency
-     * @return Url
-     */
-    public function setFrequency($frequency)
+    public function setFrequency(string $frequency): self
     {
         $this->frequency = $frequency;
+
         return $this;
     }
 
-    /**
-     * @return integer
-     */
-    public function getPriority()
+    public function getPriority(): float
     {
         return $this->priority;
     }
 
-    /**
-     * @param integer $priority
-     * @return Url
-     */
-    public function setPriority($priority)
+    public function setPriority(float $priority): self
     {
         $this->priority = $priority;
+
         return $this;
     }
 
-    public function getXML(\DOMDocument $root, \DOMElement $urlset)
+    public function getXML(\DOMDocument $root, \DOMElement $urlset): DOMElement
     {
         $urlset->setAttributeNS('', 'xmlns', self::SCHEMA);
 

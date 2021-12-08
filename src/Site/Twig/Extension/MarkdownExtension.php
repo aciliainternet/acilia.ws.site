@@ -22,7 +22,7 @@ class MarkdownExtension extends AbstractExtension
         ];
     }
 
-    public function markdown($markdown): mixed
+    public function markdown(string $markdown): mixed
     {
         return $this->parser->parse($markdown);
     }

@@ -2,18 +2,16 @@
 
 namespace WS\Site\Service;
 
-use Parsedown;
-
 class MarkdownService
 {
-    private Parsedown $parser;
+    private \Parsedown $parser;
 
     public function __construct()
     {
-        $this->parser = new Parsedown();
+        $this->parser = new \Parsedown();
     }
 
-    public function parse($markdown): string
+    public function parse(string $markdown): string
     {
         return \strval($this->parser->parse($markdown));
     }

@@ -38,11 +38,17 @@ class RedirectionService extends AbstractService
 
     public function getExactRedirection(string $url, Domain $domain): ?Redirection
     {
-        return $this->repository->findExactRedirection($url, $domain);
+        /** @var RedirectionRepository */
+        $repository = $this->repository;
+
+        return $repository->findExactRedirection($url, $domain);
     }
 
     public function getRegexRedirection(string $url, Domain $domain): ?Redirection
     {
-        return $this->repository->findRegexRedirection($url, $domain);
+        /** @var RedirectionRepository */
+        $repository = $this->repository;
+
+        return $repository->findRegexRedirection($url, $domain);
     }
 }

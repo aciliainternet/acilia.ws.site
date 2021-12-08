@@ -60,7 +60,7 @@ class WidgetConfiguration implements DomainDependantInterface, PublishingEntityI
     private string $code;
 
     /**
-     * @ORM\Column(name="config_configuration", type="json_array", nullable=false)
+     * @ORM\Column(name="config_configuration", type="json", nullable=false)
      */
     private array $configuration;
 
@@ -99,7 +99,7 @@ class WidgetConfiguration implements DomainDependantInterface, PublishingEntityI
      * @Gedmo\Blameable(on="create")
      * @ORM\Column(name="config_created_by", type="string", length=128, nullable=true)
      */
-    private $createdBy;
+    private ?string $createdBy;
 
     public function __toString(): string
     {

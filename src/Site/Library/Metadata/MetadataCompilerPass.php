@@ -17,7 +17,7 @@ class MetadataCompilerPass implements CompilerPassInterface
     const TAG_PROVIDER = 'ws.site.metadata_provider';
     const TAG_CONSUMER = 'ws.site.metadata_consumer';
 
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->has(MetadataService::class)) {
             return;
@@ -35,9 +35,7 @@ class MetadataCompilerPass implements CompilerPassInterface
             $metadataConsumerService = $container->findDefinition(MetadataConsumerService::class);
 
             $consumers = $this->findAndSortTaggedServices(self::TAG_CONSUMER, $container);
-            /** @var Reference $consumer */
             foreach ($consumers as $consumerReference) {
-                /** @var Definition $consumer */
                 $consumer = $container->findDefinition($consumerReference);
                 $consumer->addMethodCall('setMetadataConsumerService', [$metadataConsumerService]);
             }

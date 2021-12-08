@@ -35,7 +35,7 @@ class WidgetController extends AbstractController
         return 'ws_cms_site_widget';
     }
 
-    protected function useCRUDTemplate($template): bool
+    protected function useCRUDTemplate(string $template): bool
     {
         if ($template === 'show.html.twig') {
             return true;
@@ -151,7 +151,9 @@ class WidgetController extends AbstractController
             $entity->setConfiguration($configuration);
         });
 
-        $this->service->invalidateCache($id);
+        /** @var WidgetConfigurationService */
+        $service = $this->getService();
+        $service->invalidateCache($id);
 
         return parent::edit($request, $id);
     }

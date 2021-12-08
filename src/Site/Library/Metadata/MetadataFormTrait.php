@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 trait MetadataFormTrait
 {
-    protected function addMetadataFieldsFields(FormBuilderInterface $builder)
+    protected function addMetadataFieldsFields(FormBuilderInterface $builder): void
     {
         $builder
             ->add('metadataTitle', TextType::class, [

@@ -8,23 +8,28 @@ use WS\Core\Service\ContextService;
 use WS\Core\Service\SettingService;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
+use Twig\Environment;
 
 class SiteListener
 {
-    protected $contextService;
-    protected $settingService;
-    protected $translator;
-    protected $twig;
+    protected ContextService $contextService;
+    protected SettingService $settingService;
+    protected TranslatorInterface $translator;
+    protected Environment $twig;
 
-    public function __construct(ContextService $contextService, SettingService $settingService, TranslatorInterface $translator, \Twig\Environment $twig)
-    {
+    public function __construct(
+        ContextService $contextService,
+        SettingService $settingService,
+        TranslatorInterface $translator,
+        Environment $twig
+    ) {
         $this->contextService = $contextService;
         $this->settingService = $settingService;
         $this->translator = $translator;
         $this->twig = $twig;
     }
 
-    public function onRequest(RequestEvent $event)
+    public function onRequest(RequestEvent $event): void
     {
         if (!$event->isMainRequest()) {
             return;

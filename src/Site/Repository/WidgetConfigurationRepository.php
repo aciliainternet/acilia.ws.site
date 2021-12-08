@@ -44,7 +44,7 @@ class WidgetConfigurationRepository extends AbstractRepository
 
         $this->setPublishingRestriction($alias, $qb);
 
-        if ($orderBy && count($orderBy)) {
+        if (isset($orderBy) && count($orderBy)) {
             foreach ($orderBy as $field => $dir) {
                 $qb->orderBy(sprintf('%s.%s', $alias, $field), $dir);
             }

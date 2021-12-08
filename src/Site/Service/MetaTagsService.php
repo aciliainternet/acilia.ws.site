@@ -32,7 +32,7 @@ class MetaTagsService
         $this->custom = [];
     }
 
-    public function setCustom($tag, $value): void
+    public function setCustom(string $tag, string $value): void
     {
         $this->custom[$tag] = $value;
     }
@@ -49,7 +49,7 @@ class MetaTagsService
         return $this->custom;
     }
 
-    public function configure($configuration): void
+    public function configure(array $configuration): void
     {
         $order = (isset($configuration['order'])) ? $configuration['order'] : 0;
 
@@ -123,12 +123,12 @@ class MetaTagsService
         return $config;
     }
 
-    protected function sanitize($content): ?string
+    protected function sanitize(string $content): ?string
     {
         $content = $this->markdownService->parse($content);
         $content = strip_tags($content);
         $content = trim($content);
-        
+
         return $content;
     }
 }

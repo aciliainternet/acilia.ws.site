@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use WS\Core\Entity\Domain;
 use WS\Core\Service\DomainService;
 use WS\Site\Entity\WidgetConfiguration;
-use WS\Site\Service\WidgetService;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -59,6 +58,10 @@ class AddDefaultCommand extends Command
             $io->success('You have created default widgets');
         } catch (\Exception $e) {
             $io->error($e->getMessage());
+
+            return self::FAILURE;
         }
+
+        return self::SUCCESS;
     }
 }

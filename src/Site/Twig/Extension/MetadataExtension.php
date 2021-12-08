@@ -30,32 +30,32 @@ class MetadataExtension extends AbstractExtension
         ];
     }
 
-    public function getTitle($entity): ?string
+    public function getTitle(object $entity): ?string
     {
         return $this->metadataConsumerService->getMetadataService()->getTitle($entity);
     }
 
-    public function getDescription($entity): ?string
+    public function getDescription(object $entity): ?string
     {
         return $this->metadataConsumerService->getMetadataService()->getDescription($entity);
     }
 
-    public function getKeywords($entity): ?string
+    public function getKeywords(object $entity): ?string
     {
         return $this->metadataConsumerService->getMetadataService()->getKeywords($entity);
     }
 
-    public function getOpenGraphTitle($entity): ?string
+    public function getOpenGraphTitle(object $entity): ?string
     {
         return $this->metadataConsumerService->getMetadataService()->getOpenGraphTitle($entity);
     }
 
-    public function getOpenGraphType($entity): ?string
+    public function getOpenGraphType(object $entity): ?string
     {
         return $this->metadataConsumerService->getMetadataService()->getOpenGraphType($entity);
     }
 
-    public function getOpengraphImage($entity): ?string
+    public function getOpengraphImage(object $entity): ?string
     {
         return $this->metadataConsumerService->getMetadataService()->getOpengraphImage($entity);
     }
@@ -82,7 +82,7 @@ class MetadataExtension extends AbstractExtension
         }
     }
 
-    public function configure($configuration): void
+    public function configure(array $configuration): void
     {
         $this->metadataConsumerService->getMetaTagsService()->configure($configuration);
     }

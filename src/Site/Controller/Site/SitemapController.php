@@ -27,7 +27,7 @@ class SitemapController extends AbstractController
         SitemapService $sitemapService,
         ParameterBagInterface $parameterBag
     ) {
-        $this->projectDir = $parameterBag->get('kernel.project_dir');
+        $this->projectDir = \strval($parameterBag->get('kernel.project_dir'));
         $this->domain = $contextService->getDomain();
         $this->sitemapService = $sitemapService;
     }

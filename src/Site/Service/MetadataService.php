@@ -8,14 +8,14 @@ class MetadataService
 {
     protected array $providers;
 
-    public function registerProvider(MetadataProviderInterface $provider)
+    public function registerProvider(MetadataProviderInterface $provider): void
     {
         foreach ($provider->getMetadataSupportFor() as $supported) {
             $this->providers[$supported] = $provider;
         }
     }
 
-    public function getTitle($element): ?string
+    public function getTitle(object $element): ?string
     {
         if ($this->hasProvider($element)) {
             $provider = $this->getProvider($element);
@@ -25,7 +25,7 @@ class MetadataService
         return null;
     }
 
-    public function getDescription($element): ?string
+    public function getDescription(object $element): ?string
     {
         if ($this->hasProvider($element)) {
             $provider = $this->getProvider($element);
@@ -35,7 +35,7 @@ class MetadataService
         return null;
     }
 
-    public function getKeywords($element): ?string
+    public function getKeywords(object $element): ?string
     {
         if ($this->hasProvider($element)) {
             $provider = $this->getProvider($element);
@@ -45,7 +45,7 @@ class MetadataService
         return null;
     }
 
-    public function getOpenGraphTitle($element): ?string
+    public function getOpenGraphTitle(object $element): ?string
     {
         if ($this->hasProvider($element)) {
             $provider = $this->getProvider($element);
@@ -55,7 +55,7 @@ class MetadataService
         return null;
     }
 
-    public function getOpenGraphType($element): ?string
+    public function getOpenGraphType(object $element): ?string
     {
         if ($this->hasProvider($element)) {
             $provider = $this->getProvider($element);
@@ -65,7 +65,7 @@ class MetadataService
         return null;
     }
 
-    public function getOpenGraphImage($element): ?string
+    public function getOpenGraphImage(object $element): ?string
     {
         if ($this->hasProvider($element)) {
             $provider = $this->getProvider($element);
@@ -75,7 +75,7 @@ class MetadataService
         return null;
     }
 
-    public function getOpenGraphImageWidth($element): ?int
+    public function getOpenGraphImageWidth(object $element): ?int
     {
         if ($this->hasProvider($element)) {
             $provider = $this->getProvider($element);
@@ -85,7 +85,7 @@ class MetadataService
         return null;
     }
 
-    public function getOpenGraphImageHeight($element): ?int
+    public function getOpenGraphImageHeight(object $element): ?int
     {
         if ($this->hasProvider($element)) {
             $provider = $this->getProvider($element);
@@ -95,18 +95,12 @@ class MetadataService
         return null;
     }
 
-    protected function hasProvider($element): bool
+    protected function hasProvider(object $element): bool
     {
-        if (is_object($element)) {
-            return array_key_exists(get_class($element), $this->providers);
-        } elseif (is_string($element)) {
-            return array_key_exists($element, $this->providers);
-        }
-
-        return false;
+        return array_key_exists(get_class($element), $this->providers);
     }
 
-    protected function getProvider($element): MetadataProviderInterface
+    protected function getProvider(object $element): MetadataProviderInterface
     {
         return $this->providers[get_class($element)];
     }

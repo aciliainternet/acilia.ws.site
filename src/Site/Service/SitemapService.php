@@ -28,7 +28,7 @@ class SitemapService
         return sprintf('%s/%s/', $this->config['root'], $path);
     }
 
-    public function getSitemap($locale): array
+    public function getSitemap(string $locale): array
     {
         $xml = [];
         $root = $this->generateUrlSitemapDocument();
@@ -66,7 +66,7 @@ class SitemapService
         return $xml;
     }
 
-    protected function createSitemapIndex($length, $locale = null): \DOMDocument
+    protected function createSitemapIndex(int $length, ?string $locale = null): \DOMDocument
     {
         $root = $this->generateUrlSitemapDocument();
 
@@ -131,17 +131,13 @@ class SitemapService
         return $url;
     }
 
-    protected function getUrls($locale): array
+    protected function getUrls(?string $locale): array
     {
         $routes = $this->getRoutes($locale);
         $urls = [];
         foreach ($routes as $route) {
             if (!isset($route['modified'])) {
-                try {
-                    $route['modified'] = new \DateTime('now');
-                } catch (\Exception $e) {
-                    $route['modified'] = null;
-                }
+                $route['modified'] = new \DateTimeImmutable('now');
             }
 
             $routeName = $route['route']['name'] ??  '';
@@ -158,7 +154,7 @@ class SitemapService
         return $urls;
     }
 
-    protected function getRoutes($locale): array
+    protected function getRoutes(string $locale): array
     {
         $routes = [];
 

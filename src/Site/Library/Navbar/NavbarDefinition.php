@@ -4,12 +4,12 @@ namespace WS\Site\Library\Navbar;
 
 class NavbarDefinition
 {
-    private $code;
-    private $label;
-    private $description;
-    private $route;
-    protected $children;
-    protected $options;
+    private string $code;
+    private string $label;
+    private ?string $description;
+    private ?array $route;
+    protected array $children;
+    protected array $options;
 
     public function __construct(
         string $code,

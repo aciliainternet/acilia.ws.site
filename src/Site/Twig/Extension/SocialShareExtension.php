@@ -27,7 +27,7 @@ class SocialShareExtension extends AbstractExtension
         ];
     }
 
-    public function getTwitterLink($path, $text = ''): string
+    public function getTwitterLink(string $path, string $text = ''): string
     {
         $twitterName = $this->settingService->get('social_twitter_profile');
 
@@ -40,12 +40,12 @@ class SocialShareExtension extends AbstractExtension
         );
     }
 
-    public function getFacebookLink($path): string
+    public function getFacebookLink(string $path): string
     {
         return sprintf('https://www.facebook.com/sharer/sharer.php?u=%s&amp;src=sdkpreparse', $path);
     }
 
-    public function getEmailLink($title, $path): string
+    public function getEmailLink(string $title, string $path): string
     {
         return sprintf(
             'mailto:?subject=%s%s&amp;body=%s %s',

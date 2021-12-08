@@ -13,7 +13,7 @@ class SitemapCompilerPass implements CompilerPassInterface
 
     const TAG = 'ws.site.sitemap_provider';
 
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->has(SitemapService::class)) {
             return;

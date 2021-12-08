@@ -22,7 +22,7 @@ class RedirectionController extends AbstractController
         return $this->service;
     }
 
-    protected function useCRUDTemplate($template): bool
+    protected function useCRUDTemplate(string $template): bool
     {
         if ($template == 'index.html.twig') {
             return false;

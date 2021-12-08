@@ -53,7 +53,7 @@ class WidgetConfigurationService extends AbstractService
         ];
     }
 
-    public function getImageEntityClass($entity): ?string
+    public function getImageEntityClass(object $entity): ?string
     {
         if (!$entity instanceof WidgetConfiguration) {
             return null;
@@ -66,7 +66,7 @@ class WidgetConfigurationService extends AbstractService
         }
     }
 
-    public function getImageFields($entity): array
+    public function getImageFields(object $entity): array
     {
         assert(
             $entity instanceof WidgetConfiguration,

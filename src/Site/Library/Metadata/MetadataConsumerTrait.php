@@ -11,7 +11,7 @@ trait MetadataConsumerTrait
     /** @var MetadataConsumerService */
     protected $metadataConsumerService;
 
-    public function setMetadataConsumerService(MetadataConsumerService $metadataConsumerService)
+    public function setMetadataConsumerService(MetadataConsumerService $metadataConsumerService): void
     {
         $this->metadataConsumerService = $metadataConsumerService;
     }
@@ -26,7 +26,7 @@ trait MetadataConsumerTrait
         return $this->metadataConsumerService->getMetaTagsService();
     }
 
-    public function configureMetadata($element, $order = 10)
+    public function configureMetadata($element, $order = 10): void
     {
         $configuration = [
             'order' => $order,

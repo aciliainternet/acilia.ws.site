@@ -4,5 +4,5 @@ namespace WS\Site\Library\Sitemap;
 
 interface SitemapProviderInterface
 {
-    public function getRoutes($locale) : array;
+    public function getRoutes(string $locale): array;
 }

@@ -8,7 +8,7 @@ use Twig\Node\Expression\AbstractExpression;
 
 class MetaTagsNode extends Node
 {
-    public function __construct($name, AbstractExpression $value, $line, $tag = null)
+    public function __construct(string $name, AbstractExpression $value, int $line = 0, string $tag = null)
     {
         parent::__construct(['value' => $value], ['name' => $name], $line, $tag);
     }
