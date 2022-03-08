@@ -59,11 +59,9 @@ class WidgetController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        $this->addEvent(self::EVENT_INDEX_EXTRA_DATA, function () {
-            return [
-                'widgets' => $this->widgetService->getWidgets()
-            ];
-        });
+        $this->addEvent(self::EVENT_INDEX_EXTRA_DATA, fn() => [
+            'widgets' => $this->widgetService->getWidgets()
+        ]);
 
         return parent::index($request);
     }
@@ -90,16 +88,14 @@ class WidgetController extends AbstractController
             $entity->setWidget($widget->getId());
         });
 
-        $this->addEvent(self::EVENT_CREATE_CREATE_FORM, function (WidgetConfiguration $entity) use ($widget) {
-            return $this->createForm(
-                $this->getService()->getFormClass(),
-                $entity,
-                [
-                    'widget' => $widget,
-                    'translation_domain' => $this->getTranslatorPrefix()
-                ]
-            );
-        });
+        $this->addEvent(self::EVENT_CREATE_CREATE_FORM, fn(WidgetConfiguration $entity) => $this->createForm(
+            $this->getService()->getFormClass(),
+            $entity,
+            [
+                'widget' => $widget,
+                'translation_domain' => $this->getTranslatorPrefix()
+            ]
+        ));
 
         $this->addEvent(self::EVENT_IMAGE_HANDLE, function (WidgetConfiguration $entity, string $imageField, AssetImage $assetImage) {
             $configuration = $entity->getConfiguration();
@@ -125,16 +121,14 @@ class WidgetController extends AbstractController
      */
     public function edit(Request $request, int $id): Response
     {
-        $this->addEvent(self::EVENT_EDIT_CREATE_FORM, function (WidgetConfiguration $entity) {
-            return $this->createForm(
-                $this->getService()->getFormClass(),
-                $entity,
-                [
-                    'widget' => $this->widgetService->getWidget($entity->getWidget()),
-                    'translation_domain' => $this->getTranslatorPrefix()
-                ]
-            );
-        });
+        $this->addEvent(self::EVENT_EDIT_CREATE_FORM, fn(WidgetConfiguration $entity) => $this->createForm(
+            $this->getService()->getFormClass(),
+            $entity,
+            [
+                'widget' => $this->widgetService->getWidget($entity->getWidget()),
+                'translation_domain' => $this->getTranslatorPrefix()
+            ]
+        ));
 
         $this->addEvent(self::EVENT_IMAGE_HANDLE, function (WidgetConfiguration $entity, string $imageField, ?AssetImage $assetImage) {
             $configuration = $entity->getConfiguration();

@@ -32,12 +32,10 @@ class RedirectionType extends AbstractType
                     'data-component' => 'ws_select',
                     'data-search' => false
                 ],
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('d')
-                        ->where('d.type = :type')
-                        ->setParameter('type', Domain::CANONICAL)
-                        ->orderBy('d.host', 'ASC');
-                },
+                'query_builder' => fn(EntityRepository $er) => $er->createQueryBuilder('d')
+                    ->where('d.type = :type')
+                    ->setParameter('type', Domain::CANONICAL)
+                    ->orderBy('d.host', 'ASC'),
             ])
             ->add('origin', TextType::class, [
                 'label' => 'fields.origin.label',

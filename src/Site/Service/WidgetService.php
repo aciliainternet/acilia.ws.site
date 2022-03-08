@@ -54,9 +54,7 @@ class WidgetService implements ActivityLogInterface
     {
         $widgets = $this->widgets;
 
-        usort($widgets, function (WidgetInterface $a, WidgetInterface $b) {
-            return strcmp($a->getId(), $b->getId());
-        });
+        usort($widgets, fn(WidgetInterface $a, WidgetInterface $b) => strcmp($a->getId(), $b->getId()));
 
         return $widgets;
     }

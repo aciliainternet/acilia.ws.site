@@ -53,7 +53,7 @@ class Redirection
      * @Gedmo\Blameable(on="create")
      * @ORM\Column(name="redirection_created_by", type="string", length=128, nullable=true)
      */
-    private ?string $createdBy;
+    private ?string $createdBy = null;
 
     /**
      * @Gedmo\Timestampable(on="create")

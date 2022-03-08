@@ -15,6 +15,7 @@ use WS\Core\Service\SettingService;
 
 class GenerateSitemapCommand extends Command
 {
+    protected static $defaultName = 'ws:sitemap:generate';
     private SitemapService $sitemapService;
     private RouterInterface $router;
     private SettingService $settingService;
@@ -42,9 +43,7 @@ class GenerateSitemapCommand extends Command
 
     protected function configure(): void
     {
-        $this
-            ->setName('ws:sitemap:generate')
-            ->setDescription('Generate the xml sitemap of the site');
+        $this->setDescription('Generate the xml sitemap of the site');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

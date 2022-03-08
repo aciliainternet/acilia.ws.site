@@ -75,12 +75,12 @@ class WidgetConfiguration implements DomainDependantInterface, PublishingEntityI
     /**
      * @ORM\Column(name="config_publish_since", type="datetime", nullable=true)
      */
-    private ?\DateTimeInterface $publishSince;
+    private ?\DateTimeInterface $publishSince = null;
 
     /**
      * @ORM\Column(name="config_publish_until", type="datetime", nullable=true)
      */
-    private ?\DateTimeInterface $publishUntil;
+    private ?\DateTimeInterface $publishUntil = null;
 
     /**
      * @Gedmo\Timestampable(on="create")
@@ -99,7 +99,7 @@ class WidgetConfiguration implements DomainDependantInterface, PublishingEntityI
      * @Gedmo\Blameable(on="create")
      * @ORM\Column(name="config_created_by", type="string", length=128, nullable=true)
      */
-    private ?string $createdBy;
+    private ?string $createdBy = null;
 
     public function __toString(): string
     {

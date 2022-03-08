@@ -14,6 +14,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class AddDefaultCommand extends Command
 {
+    protected static $defaultName = 'ws:widget:add-default';
     protected EntityManagerInterface $em;
     protected DomainService $domainService;
 
@@ -27,9 +28,7 @@ class AddDefaultCommand extends Command
 
     protected function configure(): void
     {
-        $this
-            ->setName('ws:widget:add-default')
-            ->setDescription('Add default widgets into WideStand')
+        $this->setDescription('Add default widgets into WideStand')
             ->addArgument('domain', InputArgument::REQUIRED, 'The id of the domain')
         ;
     }

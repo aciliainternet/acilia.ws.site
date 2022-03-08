@@ -92,17 +92,13 @@ class NavbarService
         foreach ($navbar as $menu) {
             if ($menu->isContainer()) {
                 $navbarContents = $menu->getChildren();
-                usort($navbarContents, function (NavbarDefinition $menu1, NavbarDefinition $menu2) {
-                    return strcmp((string) $menu1->getOrder(), (string) $menu2->getOrder());
-                });
+                usort($navbarContents, fn(NavbarDefinition $menu1, NavbarDefinition $menu2) => strcmp((string) $menu1->getOrder(), (string) $menu2->getOrder()));
                 $menu->setChildren($navbarContents);
             }
         }
 
         // order containers menu
-        usort($navbar, function (NavbarDefinition $menu1, NavbarDefinition $menu2) {
-            return strcmp((string) $menu1->getOrder(), (string) $menu2->getOrder());
-        });
+        usort($navbar, fn(NavbarDefinition $menu1, NavbarDefinition $menu2) => strcmp((string) $menu1->getOrder(), (string) $menu2->getOrder()));
 
         return $navbar;
     }

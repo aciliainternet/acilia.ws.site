@@ -46,9 +46,7 @@ class WidgetCollectionWidget implements WidgetInterface
                     'data-component' => 'ws_select',
                     'data-search' => true
                 ],
-                'query_builder' => function (WidgetConfigurationRepository $er) {
-                    return $er->getAvailableQuery($this->contextService->getDomain());
-                }
+                'query_builder' => fn(WidgetConfigurationRepository $er) => $er->getAvailableQuery($this->contextService->getDomain())
             ]);
     }
 
