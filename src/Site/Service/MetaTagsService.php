@@ -106,6 +106,11 @@ class MetaTagsService
                         break;
                     case 'order':
                         break;
+                    case 'custom':
+                        if (is_array($value)) {
+                            $this->setCustoms($value);
+                        }
+                        break;
                     default:
                         if (!isset($config[$key]) || trim($value)) {
                             $config[$key] = trim($value);

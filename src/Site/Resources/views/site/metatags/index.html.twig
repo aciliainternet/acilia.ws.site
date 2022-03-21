@@ -4,7 +4,7 @@
 {{ include('@WSSite/site/metatags/blocks/opengraph.html.twig', config, with_context = false) }}
 
 {% if custom|length > 0 %}
-    {{ include('@WSSite/site/metatags/blocks/custom.html.twig', config, with_context = false) }}
+    {{ include('@WSSite/site/metatags/blocks/custom.html.twig', { 'custom': custom }, with_context = false) }}
 {% endif %}
 <!-- END META TAGS -->
 
