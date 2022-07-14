@@ -176,7 +176,7 @@ class SitemapService
         string $route,
         string $frequency,
         float $priority,
-        \DateTime $lastModified = null
+        \DateTimeInterface $lastModified = null
     ): Url {
         $url = new Url();
         $url->setUrl($route)

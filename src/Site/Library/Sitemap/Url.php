@@ -17,7 +17,7 @@ class Url
     const FREQUENCY_NEVER   = 'never';
 
     protected string $url;
-    protected \DateTime $lastModified;
+    protected ?\DateTimeInterface $lastModified = null;
     protected string $frequency;
     protected float $priority;
 
@@ -32,12 +32,12 @@ class Url
 
         return $this;
     }
-    public function getLastModified(): \DateTime
+    public function getLastModified(): ?\DateTimeInterface
     {
         return $this->lastModified;
     }
 
-    public function setLastModified(\DateTime $lastModified): self
+    public function setLastModified(\DateTimeInterface $lastModified): self
     {
         $this->lastModified = $lastModified;
 
