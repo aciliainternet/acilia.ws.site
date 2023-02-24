@@ -56,6 +56,7 @@ class SitemapService
     {
         $root = $this->generateUrlSitemapDocument();
         $urlSet = $root->createElement('sitemapindex');
+        $urlSet->setAttributeNS('', 'xmlns', Url::SCHEMA);
         foreach ($domains as $domain) {
             $child = $this->getChildSitemapXml($root, $domain->getLocale());
             $urlSet->appendChild($child);
