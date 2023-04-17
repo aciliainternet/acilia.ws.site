@@ -21,8 +21,8 @@ class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->info('Allows to configure sitemap root location.')
                     ->children()
-                        ->scalarNode('root')
-                            ->defaultValue('public/site')
+                        ->scalarNode('prefix')
+                            ->defaultValue('sitemap')
                         ->end()
                     ->end()
                 ->end() // sitemap

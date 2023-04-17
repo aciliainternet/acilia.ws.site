@@ -23,9 +23,9 @@ class SitemapService
         $this->providers[] = $provider;
     }
 
-    public function getRootPath(string $path = 'sitemap'): string
+    public function getPrefix(): string
     {
-        return sprintf('%s/%s/', $this->config['root'], $path);
+        return $this->config['prefix'];
     }
 
     public function getSitemap($locale): array
