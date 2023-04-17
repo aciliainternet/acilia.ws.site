@@ -4,7 +4,7 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "aciliainternet/acilia.ws.core": "dev-driver-storage"
+        "aciliainternet/acilia.ws.core": "^5.3"
     },
     "autoload": {
         "psr-4": {
