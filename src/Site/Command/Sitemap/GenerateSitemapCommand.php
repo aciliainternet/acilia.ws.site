@@ -2,16 +2,17 @@
 
 namespace WS\Site\Command\Sitemap;
 
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use WS\Core\Library\Storage\StorageDriverInterface;
 use WS\Core\Service\ContextService;
 use WS\Core\Service\DomainService;
 use WS\Site\Service\SitemapService;
 use WS\Core\Service\SettingService;
+use WS\Core\Service\StorageService;
 
 class GenerateSitemapCommand extends Command
 {
@@ -21,7 +22,7 @@ class GenerateSitemapCommand extends Command
     private SettingService $settingService;
     private DomainService $domainService;
     private ContextService $contextService;
-    private string $projectDir;
+    private StorageService $storageService;
 
     public function __construct(
         SitemapService $sitemapService,
@@ -29,7 +30,7 @@ class GenerateSitemapCommand extends Command
         SettingService $settingService,
         DomainService $domainService,
         ContextService $contextService,
-        ParameterBagInterface $parameterBag
+        StorageService $storageService
     ) {
         parent::__construct();
 
@@ -38,7 +39,7 @@ class GenerateSitemapCommand extends Command
         $this->domainService = $domainService;
         $this->router = $router;
         $this->contextService = $contextService;
-        $this->projectDir = \strval($parameterBag->get('kernel.project_dir'));
+        $this->storageService = $storageService;
     }
 
     protected function configure(): void
@@ -101,38 +102,26 @@ class GenerateSitemapCommand extends Command
 
     private function saveSitemaps(array $xml, ?string $host, ?string $locale = null): void
     {
-        $sitemapPath = sprintf('%s/%s', $this->projectDir, $this->sitemapService->getRootPath());
-        if (!file_exists($sitemapPath)) {
-            mkdir($sitemapPath);
-        }
-
+        $sitemapPrefix = $this->sitemapService->getPrefix();
         if (isset($xml['sitemap'])) {
-            $path = sprintf('%s/%s/sitemap.xml', $sitemapPath, $host);
+            $path = sprintf('%s/%s/sitemap.xml', $sitemapPrefix, $host);
             if ($locale !== null) {
-                $path = sprintf('%s/%s/sitemap-%s.xml', $sitemapPath, $host, $locale);
+                $path = sprintf('%s/%s/sitemap-%s.xml', $sitemapPrefix, $host, $locale);
             }
 
-            if (!is_dir(dirname($path))) {
-                mkdir(dirname($path));
-            }
-
-            file_put_contents($path, $xml['sitemap']);
-            file_put_contents($path.'.gz', zlib_encode($xml['sitemap'], ZLIB_ENCODING_GZIP));
+            $this->storageService->save($path, $xml['sitemap'], StorageDriverInterface::CONTEXT_PRIVATE);
+            $this->storageService->save($path.'.gz', zlib_encode($xml['sitemap'], ZLIB_ENCODING_GZIP), StorageDriverInterface::CONTEXT_PRIVATE);
         }
 
         if (isset($xml['sites'])) {
             foreach ($xml['sites'] as $key => $site) {
-                $path = sprintf('%s/%s/sitemap-%s.xml', $sitemapPath, $host, $key + 1);
+                $path = sprintf('%s/%s/sitemap-%s.xml', $sitemapPrefix, $host, (string)($key + 1));
                 if ($locale !== null) {
-                    $path = sprintf('%s/%s/sitemap-%s-%s.xml', $sitemapPath, $host, $locale, $key + 1);
+                    $path = sprintf('%s/%s/sitemap-%s-%s.xml', $sitemapPrefix, $host, $locale, (string)($key + 1));
                 }
 
-                if (!is_dir(dirname($path))) {
-                    mkdir(dirname($path));
-                }
-
-                file_put_contents($path, $site);
-                file_put_contents($path . '.gz', zlib_encode($site, ZLIB_ENCODING_GZIP));
+                $this->storageService->save($path, $site, StorageDriverInterface::CONTEXT_PRIVATE);
+                $this->storageService->save($path . '.gz', zlib_encode($site, ZLIB_ENCODING_GZIP), StorageDriverInterface::CONTEXT_PRIVATE);
             }
         }
     }
