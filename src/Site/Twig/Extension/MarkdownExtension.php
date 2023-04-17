@@ -22,8 +22,12 @@ class MarkdownExtension extends AbstractExtension
         ];
     }
 
-    public function markdown(string $markdown): string
+    public function markdown(?string $markdown): string
     {
+        if (null === $markdown) {
+            return '';
+        }
+        
         return $this->parser->parse($markdown);
     }
 }

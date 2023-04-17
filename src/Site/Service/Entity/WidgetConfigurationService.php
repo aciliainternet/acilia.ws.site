@@ -53,6 +53,11 @@ class WidgetConfigurationService extends AbstractService
         ];
     }
 
+    public function getFilterFields()
+    {
+        return ['name'];
+    }
+
     public function getImageEntityClass(object $entity): ?string
     {
         if (!$entity instanceof WidgetConfiguration) {

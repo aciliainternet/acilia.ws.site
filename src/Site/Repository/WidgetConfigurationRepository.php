@@ -25,11 +25,6 @@ class WidgetConfigurationRepository extends AbstractRepository
         return WidgetConfiguration::class;
     }
 
-    public function getFilterFields(): array
-    {
-        return ['name'];
-    }
-
     public function getAvailableQuery(
         Domain $domain,
          array $filters = null,

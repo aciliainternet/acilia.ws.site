@@ -25,6 +25,11 @@ class RedirectionService extends AbstractService
         return ['origin'];
     }
 
+    public function getFilterFields()
+    {
+        return ['origin', 'destination'];
+    }
+
     public function getListFields(): array
     {
         return [

@@ -21,11 +21,6 @@ class RedirectionRepository extends AbstractRepository
         return Redirection::class;
     }
 
-    public function getFilterFields(): array
-    {
-        return ['origin', 'destination'];
-    }
-
     public function findExactRedirection(string $url, Domain $domain): ?Redirection
     {
         $alias = 'r';
