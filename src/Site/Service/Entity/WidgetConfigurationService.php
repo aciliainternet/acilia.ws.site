@@ -53,7 +53,7 @@ class WidgetConfigurationService extends AbstractService
         ];
     }
 
-    public function getFilterFields()
+    public function getFilterFields(): array
     {
         return ['name'];
     }
